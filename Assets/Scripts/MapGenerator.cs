@@ -1,28 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject[] mapParts;
-    [SerializeField] private Transform parent;
+    [SerializeField] private GameObject[] _mapParts;
+    [SerializeField] private GameObject _floorPrefab;
+    [SerializeField] private Transform _parent;
     private string[] _readLines = default!;
-    private string path = @"Assets\StreamingAssets\map01.csv";
+    private string _path = @"Assets\StreamingAssets\map01.csv";
 
-    private int mapWidth = 10;
-    private int mapHeight = 10;
+    private int _mapWidth = 10;
+    private int _mapHeight = 10;
 
-    private int Width { get; set; }
-    private int Height { get; set; }
+    private int _width { get; set; }
+    private int _height { get; set; }
+
+    private List<NavMeshSurface> _allSurfaces = new List<NavMeshSurface>();
+    private List<Vector3> _allEdgePoints = new List<Vector3>();
+    private float _threshold = 1.5f;
 
     private void Awake()
     {
-        ReadData(path);
-    }
-
-    private void Start()
-    {
+        ReadData(_path);
         InitMap();
     }
 
@@ -38,22 +41,35 @@ public class MapGenerator : MonoBehaviour
         }
 
         if (_readLines.Last().Trim() == "") _readLines = _readLines.Take(_readLines.Length - 1).ToArray();//最終行が空行なら削除
-        Height = _readLines.Length;
-        Width = _readLines[0].Split(',').Length;
+
+        _height = _readLines.Length;
+        _width = _readLines[0].Split(',').Length;
     }
 
     private void InitMap()
     {
-        for (int x = 0; x < Width; x++)
+        for (int x = 0; x < _width; x++)
         {
             var cells = _readLines[x].Split(',');
 
-            for (int y = 0; y < Width; y++)
+            for (int y = 0; y < _height; y++)
             {
                 if (int.TryParse(cells[y], out int num))
                 {
-                    var pos = new Vector3(x * mapWidth, 0, y * mapHeight);
-                    var parts = Instantiate(mapParts[num], pos, Quaternion.identity, parent);
+                    var pos = new Vector3(x * _mapWidth, 0, y * _mapHeight);
+                    if (num != 99)
+                    {
+                        var parts = Instantiate(_mapParts[num], pos, Quaternion.identity, _parent);
+                    }
+
+                    var floor = Instantiate(_floorPrefab, pos, Quaternion.identity, _parent);
+
+                    // NavMeshSurfaceを収集
+                    var surface = floor.GetComponent<NavMeshSurface>();
+                    if (surface != null) _allSurfaces.Add(surface);
+
+                    //var points = floor.GetComponent<Floor>().GetEdgePoints();
+                    //_allEdgePoints.AddRange(points);
                 }
                 else
                 {
@@ -62,8 +78,45 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        //var parentPos = new Vector3();
-        //parentPos.x = 
-        //parent.transform.position = parentPos;
+        // すべてのSurfaceを一括ベイク
+        foreach (var surface in _allSurfaces)
+        {
+            surface.BuildNavMesh();
+        }
+
+        var scale = Vector3.one * 2;
+        scale.y /= 4;
+        _parent.transform.localScale = scale;
+
+        // 一括ベイクしたので接続処理いらないかも？
+        //ConnectNearbyPoints(_allEdgePoints, _threshold);
+    }
+
+    private void ConnectNearbyPoints(List<Vector3> allPoints, float threshold)
+    {
+        for (int i = 0; i < allPoints.Count; i++)
+        {
+            for (int j = i + 1; j < allPoints.Count; j++)
+            {
+                if (Vector3.Distance(allPoints[i], allPoints[j]) < threshold)
+                {
+                    GameObject linkObj = new GameObject("NavLink");
+                    NavMeshLink link = linkObj.AddComponent<NavMeshLink>();
+                    link.startTransform = CreateTransformAt(allPoints[i]);
+                    link.endTransform = CreateTransformAt(allPoints[j]);
+                    link.width = 1.0f;
+                    link.UpdateLink();
+                    linkObj.transform.parent = _parent;
+                }
+            }
+        }
+    }
+
+    private Transform CreateTransformAt(Vector3 position)
+    {
+        GameObject pointObj = new GameObject("LinkPoint");
+        pointObj.transform.position = position;
+        pointObj.transform.parent = _parent;
+        return pointObj.transform;
     }
 }
