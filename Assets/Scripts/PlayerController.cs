@@ -8,13 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float MoveSpeed;//移動速度
-    //[SerializeField]
-    //private float RunSpeed;// 走る速度追加式
+    [SerializeField]
+    private Animator animator;//アニメーターコンポーネント
     private CharacterController characterController;// キャラクターコントローラーコンポーネント
     private Transform transform;// プレイヤーのTransformコンポーネント
     private Vector3 moveVelocity;//移動速度ベクトル
     private InputAction move;//移動入力アクション
-    //private InputAction sprint; // 走る入力アクション追加式
 
 
 
@@ -35,9 +34,8 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveVelocity * MoveSpeed * Time.deltaTime);//キャラクターを移動
         //移動方向に向ける
         transform.LookAt(transform.position + new Vector3(moveVelocity.x, 0, moveVelocity.z));
+        //アニメーション処理
+        animator.SetFloat("MoveSpeed", new Vector3(moveVelocity.x, 0, moveVelocity.z).magnitude);
 
-        
-        //重力処理
-        moveVelocity.y += Physics.gravity.y * Time.deltaTime;//Y方向の速度に重力を加算
     }
 }
