@@ -84,7 +84,7 @@ public class MapGenerator : MonoBehaviour
             surface.BuildNavMesh();
         }
 
-        var scale = Vector3.one * 2;
+        var scale = Vector3.one;
         scale.y /= 4;
         _parent.transform.localScale = scale;
 
