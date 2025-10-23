@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2af27dbebbc53d4a9bca6275059cc0c
+guid: 4ccbd75b9a8385048b0d350f2434c103
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: compass_ring_0
+      name: compass_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,15 +105,15 @@ TextureImporter:
         width: 2771
         height: 2771
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d991aa1e118d0a4eb28b2a0041d5350
-      internalID: -28354564
+      spriteID: 677e16b3e64529940b288977287017ea
+      internalID: 692695778
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9c182d9dd51052d4ba9d7b72cf31fc76
+    spriteID: 862e69faa8d02884abb602102cd33b79
     internalID: 0
     vertices: []
     indices: 
@@ -130,9 +130,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      compass_ring_0: -28354564
+      compass_0: 692695778
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
