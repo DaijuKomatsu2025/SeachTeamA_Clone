@@ -781,7 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
   _mapParts:
   - {fileID: 5530357675756883436, guid: e28828ae0faa2834590ea3cdfc0a32b6, type: 3}
-  - {fileID: 7108982249987637757, guid: a7b67e0b7d03e684188feaf923aae560, type: 3}
+  - {fileID: 5307819730017362582, guid: 1c368d71efa737940a4b67a99ac5c0b7, type: 3}
   - {fileID: 5307819730017362582, guid: 1c368d71efa737940a4b67a99ac5c0b7, type: 3}
   - {fileID: 7477210210877320692, guid: ed4d4b13a5fa28348906fdda8e920e52, type: 3}
   - {fileID: 6936562339502726008, guid: c66e9369c6649374e8604767a3145684, type: 3}
