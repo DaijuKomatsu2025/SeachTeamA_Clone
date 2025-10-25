@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,9 +10,18 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject[] _mapParts;
     [SerializeField] private GameObject _floorPrefab;
+    [SerializeField] private GameObject _spawnNormal;
+    [SerializeField] private GameObject[] _spawnA_Walls;
+    [SerializeField] private GameObject[] _nearWalls;
+    [SerializeField] private GameObject[] _bigWalls;
+    [SerializeField] private GameObject[] _hintObjects;
+
     [SerializeField] private Transform _parent;
+    private Vector3 _newPosition;
     private string[] _readLines = default!;
+    private string[] _readEventLines = default!;
     private string _path = @"Assets\StreamingAssets\map01.csv";
+    private string _eventPath = @"Assets\StreamingAssets\eventMap01.csv";
 
     private int _mapWidth = 10;
     private int _mapHeight = 10;
@@ -19,25 +29,27 @@ public class MapGenerator : MonoBehaviour
     private int _width { get; set; }
     private int _height { get; set; }
 
+    private int _widthEvent { get; set; }
+    private int _heightEvent { get; set; }
+
     private List<NavMeshSurface> _allSurfaces = new List<NavMeshSurface>();
-    //private List<Vector3> _allEdgePoints = new List<Vector3>();
-    //private float _threshold = 1.5f;
 
     private void Awake()
     {
-        ReadData(_path);
-        InitMap();
+        ReadData();
+        ReadEventData();
+        StartCoroutine(InitMap());
     }
 
-    private void ReadData(string path)
+    private void ReadData()
     {
         try
         {
-            _readLines = File.ReadAllLines(path);
+            _readLines = File.ReadAllLines(_path);
         }
         catch (Exception ex)
         {
-            Debug.Log($"{path} 読み込みエラー: {ex.Message}");
+            Debug.Log($"{_path} 読み込みエラー: {ex.Message}");
         }
 
         if (_readLines.Last().Trim() == "") _readLines = _readLines.Take(_readLines.Length - 1).ToArray();//最終行が空行なら削除
@@ -46,7 +58,24 @@ public class MapGenerator : MonoBehaviour
         _width = _readLines[0].Split(',').Length;
     }
 
-    private void InitMap()
+    private void ReadEventData()
+    {
+        try
+        {
+            _readEventLines = File.ReadAllLines(_eventPath);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"{_eventPath} 読み込みエラー: {ex.Message}");
+        }
+
+        if (_readEventLines.Last().Trim() == "") _readEventLines = _readEventLines.Take(_readEventLines.Length - 1).ToArray();
+
+        _heightEvent = _readEventLines.Length;
+        _widthEvent = _readEventLines[0].Split(',').Length;
+    }
+
+    IEnumerator InitMap()
     {
         for (int x = 0; x < _width; x++)
         {
@@ -67,16 +96,15 @@ public class MapGenerator : MonoBehaviour
                     // NavMeshSurfaceを収集
                     var surface = floor.GetComponent<NavMeshSurface>();
                     if (surface != null) _allSurfaces.Add(surface);
-
-                    //var points = floor.GetComponent<Floor>().GetEdgePoints();
-                    //_allEdgePoints.AddRange(points);
                 }
                 else
                 {
-                    Debug.Log("CSVデータに不備があります");
+                    Debug.Log("map.CSVデータに不備があります");
                 }
             }
         }
+
+        InitEvent();
 
         // すべてのSurfaceを一括ベイク
         foreach (var surface in _allSurfaces)
@@ -88,35 +116,75 @@ public class MapGenerator : MonoBehaviour
         scale.y /= 3.0f;
         _parent.transform.localScale = scale;
 
-        // 一括ベイクしたので接続処理いらないかも？
-        //ConnectNearbyPoints(_allEdgePoints, _threshold);
+        _parent.transform.position = _newPosition;
+
+        yield return null;
     }
 
-    private void ConnectNearbyPoints(List<Vector3> allPoints, float threshold)
+    private void InitEvent()
     {
-        for (int i = 0; i < allPoints.Count; i++)
+        for (int x = 0; x < _widthEvent; x++)
         {
-            for (int j = i + 1; j < allPoints.Count; j++)
+            var cells = _readEventLines[x].Split(',');
+
+            for (int y = 0; y < _heightEvent; y++)
             {
-                if (Vector3.Distance(allPoints[i], allPoints[j]) < threshold)
+                var pos = new Vector3(x * _mapWidth, 0, y * _mapHeight);
+
+                if (cells[y] == "00") { } // 何もしない
+                else if (cells[y] == "SS")
                 {
-                    GameObject linkObj = new GameObject("NavLink");
-                    NavMeshLink link = linkObj.AddComponent<NavMeshLink>();
-                    link.startTransform = CreateTransformAt(allPoints[i]);
-                    link.endTransform = CreateTransformAt(allPoints[j]);
-                    link.width = 1.0f;
-                    link.UpdateLink();
-                    linkObj.transform.parent = _parent;
+                    _newPosition = new Vector3(-x * 7.5f, 0, -y * 7.5f);
+                    var hint = Instantiate(_hintObjects[2], pos, Quaternion.identity, _parent);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(0);
+                }
+                else if (cells[y] == "N0")
+                {
+                    Instantiate(_spawnNormal, pos, Quaternion.identity, _parent);
+                }
+                else if (cells[y].StartsWith("W"))
+                {
+                    int.TryParse(cells[y].Substring(1, 1), out int code);
+                    Instantiate(_nearWalls[code - 1], pos, Quaternion.identity, _parent);
+                }
+                else if (cells[y] == "A1")
+                {
+                    Instantiate(_spawnA_Walls[0], pos, Quaternion.identity, _parent);
+                }
+                else if (cells[y].StartsWith("U"))
+                {
+                    var hint = Instantiate(_hintObjects[0], pos, Quaternion.identity, _parent);
+                    int.TryParse(cells[y].Substring(1, 1), out int code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                }
+                else if (cells[y].StartsWith("D"))
+                {
+                    var hint = Instantiate(_hintObjects[1], pos, Quaternion.identity, _parent);
+                    int.TryParse(cells[y].Substring(1, 1), out int code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                }
+                else if (cells[y].StartsWith("L"))
+                {
+                    var hint = Instantiate(_hintObjects[2], pos, Quaternion.identity, _parent);
+                    int.TryParse(cells[y].Substring(1, 1), out int code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                }
+                else if (cells[y].StartsWith("R"))
+                {
+                    var hint = Instantiate(_hintObjects[3], pos, Quaternion.identity, _parent);
+                    int.TryParse(cells[y].Substring(1, 1), out int code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                }
+                else if (cells[y].StartsWith("B"))
+                {
+                    int.TryParse(cells[y].Substring(1, 1), out int code);
+                    Instantiate(_bigWalls[code - 1], pos, Quaternion.identity, _parent);
+                }
+                else
+                {
+                    Debug.Log("eventMap.CSVデータに不備があります");
                 }
             }
         }
-    }
-
-    private Transform CreateTransformAt(Vector3 position)
-    {
-        GameObject pointObj = new GameObject("LinkPoint");
-        pointObj.transform.position = position;
-        pointObj.transform.parent = _parent;
-        return pointObj.transform;
     }
 }

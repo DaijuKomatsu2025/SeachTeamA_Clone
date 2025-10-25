@@ -15,11 +15,14 @@ public class GameModeManager : MonoBehaviour
     }
     public enum GameMode
     {
+        Title,
         Explore,
         Annihilate,
+        TimeOver,
+        GameOver,
     }
 
-    public static GameMode Mode { get; set; } = GameMode.Explore;
+    public static GameMode currentMode { get; set; } = GameMode.Explore;
 
-    public static void SetGameMode(GameMode mode) => Mode = mode;
+    public static void SetGameMode(GameMode mode) => currentMode = mode;
 }

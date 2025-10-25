@@ -28,10 +28,10 @@ public class EnemyStatus : MobStatus
 
     private void Update()
     {
-        if (_state is StateEnum.Normal)
-        {
-            _animator.SetFloat("MoveSpeed", _agent.velocity.magnitude);
-        }
+        //if (_state is StateEnum.Normal)
+        //{
+        //    _animator.SetFloat("MoveSpeed", _agent.velocity.magnitude);
+        //}
     }
 
     protected override void OnDie()
@@ -52,12 +52,12 @@ public class EnemyStatus : MobStatus
         base.OnDestroy();
         OnEnemyDie.RemoveAllListeners();
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag.Contains("Player"))
+        if (collision.gameObject.tag.Contains("Player"))
         {
             _life = 0;
+            _agent.isStopped = true;
             OnDie();
         }
     }
