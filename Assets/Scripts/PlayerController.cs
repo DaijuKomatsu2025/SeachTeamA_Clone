@@ -3,18 +3,21 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(PlayerStatus))]
+[RequireComponent(typeof(CommonAttack))]
+
 
 public class PlayerController : CommonStatus
 {
     //[SerializeField]
     //private float MoveSpeed;//移動速度
-    [SerializeField]
-    private Animator animator;//アニメーターコンポーネント
+    //[SerializeField]
+    //private Animator animator;//アニメーターコンポーネント
     private CharacterController characterController;// キャラクターコントローラーコンポーネント
     private Transform transform;// プレイヤーのTransformコンポーネント
     private Vector3 moveVelocity;//移動速度ベクトル
     private InputAction move;//移動入力アクション
-
+    private InputAction attack;//攻撃入力アクション
 
 
     void Start()
