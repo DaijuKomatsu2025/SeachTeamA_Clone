@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 [RequireComponent(typeof(NavMeshAgent))]
@@ -14,8 +14,9 @@ public class EnemyStatus : CommonStatus
     }
     protected void Update()
     {
-        animator.SetFloat("MoveSpeed", agent.velocity.magnitude);//�ړ����x�ɉ����ăA�j���[�V������ω�������
+        animator.SetFloat("MoveSpeed", agent.velocity.magnitude);// 移動の入力値をアニメーターに渡す
     }
+
     private OnDieEvent OnEnemyDie = new OnDieEvent();
 
     public OnDieEvent EnewmyDieEvent => OnEnemyDie;

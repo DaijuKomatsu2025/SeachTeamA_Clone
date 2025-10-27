@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class HintMessage : MonoBehaviour
 {
     [SerializeField] private Canvas messageWindowCanvas;
     [SerializeField] private string[] _hintText;
-    private string _currentMsg = "–¢İ’è";
+    private string _currentMsg = "æœªè¨­å®š";
 
     private void Start()
     {
-        if (messageWindowCanvas != null)//‰Šú’l‚ÅƒƒbƒZ[ƒWƒEƒBƒ“ƒhƒEƒLƒƒƒ“ƒoƒX‚Ì‰Šú’l‚ğFalse‚É
+        if (messageWindowCanvas != null)//ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Åƒï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Xï¿½Ìï¿½ï¿½ï¿½ï¿½lï¿½ï¿½Falseï¿½ï¿½
         {
             messageWindowCanvas.gameObject.SetActive(false);
         }
@@ -22,7 +22,7 @@ public class HintMessage : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("ƒqƒ“ƒg•\¦ƒIƒt");
+        Debug.Log("ï¿½qï¿½ï¿½ï¿½gï¿½\ï¿½ï¿½ï¿½Iï¿½t");
         HideMessageWindow(_currentMsg);
     }
 
@@ -34,8 +34,8 @@ public class HintMessage : MonoBehaviour
         }
         else
         {
-            _currentMsg = "HHH";
-            Debug.Log("ˆø”‚ªƒƒbƒZ[ƒW”z—ñ‚Ì—v‘f”‚ğƒI[ƒo[‚µ‚Ä‚¢‚Ü‚·");
+            _currentMsg = "ï¼Ÿï¼Ÿï¼Ÿ";
+            Debug.Log("å¼•æ•°ãŒãƒ¡ãƒƒã‚»ãƒ¼ã‚¸é…åˆ—ã®è¦ç´ æ•°ã‚’ã‚ªãƒ¼ãƒãƒ¼ã—ã¦ã„ã¾ã™");
         }
     }
 

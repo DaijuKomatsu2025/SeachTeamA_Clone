@@ -1,23 +1,23 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class CollisionDetector : MonoBehaviour
 {
-    //ƒgƒŠƒK[‚É“ü‚Á‚½‚Æ‚«‚ÌƒCƒxƒ“ƒg
+    //ãƒˆãƒªã‚¬ãƒ¼ã«å…¥ã£ãŸã¨ãã®ã‚¤ãƒ™ãƒ³ãƒˆ
     [SerializeField] private TriggerEvent onTriggerEnter = new TriggerEvent();
-    //ƒgƒŠƒK[‚É“ü‚Á‚½‚Æ‚«‚Ìˆ—
+    //ãƒˆãƒªã‚¬ãƒ¼ã«å…¥ã£ãŸã¨ãã®å‡¦ç†
     [SerializeField] private TriggerEvent onTriggerStay = new TriggerEvent();
-    private void OnTriggerStay(Collider other)//ƒgƒŠƒK[‚É“ü‚Á‚½‚Æ‚«‚Ìˆ—
+    private void OnTriggerStay(Collider other)//ãƒˆãƒªã‚¬ãƒ¼ã«å…¥ã£ãŸã¨ãã®å‡¦ç†
     {
         onTriggerStay.Invoke(other);
     }
-    private void OnTriggerEnter(Collider other)//ƒgƒŠƒK[‚É“ü‚Á‚½‚Æ‚«‚Ìˆ—
+    private void OnTriggerEnter(Collider other)//ãƒˆãƒªã‚¬ãƒ¼ã«å…¥ã£ãŸã¨ãã®å‡¦ç†
     {
         onTriggerEnter.Invoke(other);
     }
-    //ƒJƒXƒ^ƒ€ƒCƒxƒ“ƒgƒNƒ‰ƒX
+    //ã‚«ã‚¹ã‚¿ãƒ ã‚¤ãƒ™ãƒ³ãƒˆã‚¯ãƒ©ã‚¹
     [Serializable]
     public class TriggerEvent : UnityEvent<Collider>
     {

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using UnityEngine;
 
 public class Floor : MonoBehaviour
@@ -11,10 +11,10 @@ public class Floor : MonoBehaviour
         Vector3 center = transform.position;
 
         List<Vector3> points = new List<Vector3>();
-        points.Add(center + new Vector3(size.x / 2f, 0f, 0f));  // âEí[
-        points.Add(center - new Vector3(size.x / 2f, 0f, 0f));  // ç∂í[
-        points.Add(center + new Vector3(0f, 0f, size.z / 2f));  // è„í[
-        points.Add(center - new Vector3(0f, 0f, size.z / 2f));  // â∫í[
+        points.Add(center + new Vector3(size.x / 2f, 0f, 0f));  // Âè≥Á´Ø
+        points.Add(center - new Vector3(size.x / 2f, 0f, 0f));  // Â∑¶Á´Ø
+        points.Add(center + new Vector3(0f, 0f, size.z / 2f));  // ‰∏äÁ´Ø
+        points.Add(center - new Vector3(0f, 0f, size.z / 2f));  // ‰∏ãÁ´Ø
 
         return points;
     }

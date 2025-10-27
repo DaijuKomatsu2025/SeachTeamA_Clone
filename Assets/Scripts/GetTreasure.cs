@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +6,7 @@ public class GetTreasure : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("‚¨•óƒQƒbƒgIIIIII");
+        Debug.Log("ãŠå®ã‚²ãƒƒãƒˆï¼ï¼ï¼ï¼ï¼ï¼");
         StartCoroutine(GameClear());
     }
 

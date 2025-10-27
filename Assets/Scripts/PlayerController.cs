@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -9,14 +9,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : CommonStatus
 {
     //[SerializeField]
-    //private float MoveSpeed;//ˆÚ“®‘¬“x
+    //private float MoveSpeed;//ç§»å‹•é€Ÿåº¦
     //[SerializeField]
-    //private Animator animator;//ƒAƒjƒ[ƒ^[ƒRƒ“ƒ|[ƒlƒ“ƒg
-    private CharacterController characterController;// ƒLƒƒƒ‰ƒNƒ^[ƒRƒ“ƒgƒ[ƒ‰[ƒRƒ“ƒ|[ƒlƒ“ƒg
-    private Transform transform;// ƒvƒŒƒCƒ„[‚ÌTransformƒRƒ“ƒ|[ƒlƒ“ƒg
-    private Vector3 moveVelocity;//ˆÚ“®‘¬“xƒxƒNƒgƒ‹
-    private InputAction move;//ˆÚ“®“ü—ÍƒAƒNƒVƒ‡ƒ“
-    private InputAction attack;//UŒ‚“ü—ÍƒAƒNƒVƒ‡ƒ“
+    //private Animator animator;//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private CharacterController characterController;// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private Transform transform;// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private Vector3 moveVelocity;//ç§»å‹•é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«
+    private InputAction move;//ç§»å‹•å…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
+    private InputAction _attack;//æ”»æ’ƒå…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
 
 
     void Start()
@@ -24,24 +24,24 @@ public class PlayerController : CommonStatus
         characterController = GetComponent<CharacterController>();
         transform = GetComponent<Transform>();
         var inputActionAsset = GetComponent<PlayerInput>().actions;
-        move = inputActionAsset.FindAction("Move");//ˆÚ“®ƒAƒNƒVƒ‡ƒ“‚ğæ“¾
-        //sprint = inputActionAsset.FindAction("Sprint"); // ‘–‚éƒAƒNƒVƒ‡ƒ“‚ğæ“¾’Ç‰Á®
+        move = inputActionAsset.FindAction("Move");//ç§»å‹•ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—
+        //sprint = inputActionAsset.FindAction("Sprint"); // èµ°ã‚‹ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—è¿½åŠ å¼
 
     }
 
     void Update()
     {
-        var inputVector = move.ReadValue<Vector2>();//ˆÚ“®“ü—ÍƒxƒNƒgƒ‹‚ğæ“¾
-        moveVelocity = new Vector3(inputVector.x, 0, inputVector.y);//ˆÚ“®‘¬“xƒxƒNƒgƒ‹‚ğİ’è
-        characterController.Move(moveVelocity * MoveSpeed * Time.deltaTime);//ƒLƒƒƒ‰ƒNƒ^[‚ğˆÚ“®
+        var inputVector = move.ReadValue<Vector2>();//ç§»å‹•å…¥åŠ›ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
+        moveVelocity = new Vector3(inputVector.x, 0, inputVector.y);//ç§»å‹•é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®š
+        characterController.Move(moveVelocity * MoveSpeed * Time.deltaTime);//ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚’ç§»å‹•
 
-        //ˆÚ“®•ûŒü‚ÉŒü‚¯‚é
+        //ç§»å‹•æ–¹å‘ã«å‘ã‘ã‚‹
         transform.LookAt(transform.position + new Vector3(moveVelocity.x, 0, moveVelocity.z));
 
-        //d—Íˆ—
+        //é‡åŠ›å‡¦ç†
         moveVelocity.y += Physics.gravity.y * Time.deltaTime;
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‡¦ç†
         animator.SetFloat("MoveSpeed", new Vector3(moveVelocity.x, 0, moveVelocity.z).magnitude);
 
     }

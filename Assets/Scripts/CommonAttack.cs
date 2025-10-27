@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(CommonStatus))]
 public class CommonAttack : MonoBehaviour
 {
-    [SerializeField] private float attackInterval = 1.0f;//UŒ‚ŠÔŠu
-    [SerializeField] private Collider attackcollider;//UŒ‚”»’è—pƒRƒ‰ƒCƒ_[
+    [SerializeField] private float attackInterval = 1.0f;//æ”»æ’ƒé–“éš”
+    [SerializeField] private Collider attackcollider;//æ”»æ’ƒåˆ¤å®šç”¨ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼
 
     private CommonStatus status;
     private void Start()
@@ -28,7 +28,7 @@ public class CommonAttack : MonoBehaviour
     }
     public void OnAttackHit(Collider collider)
     {
-        //UŒ‚”»’è‚ÉG‚ê‚½ƒIƒuƒWƒFƒNƒg‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+        //æ”»æ’ƒåˆ¤å®šã«è§¦ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
         var targetStatus = collider.GetComponent<CommonStatus>();
         if (null== targetStatus) return;
         targetStatus.Damage(status.attack);
@@ -37,7 +37,7 @@ public class CommonAttack : MonoBehaviour
     public void OnAttackEnd()
     {
         attackcollider.enabled = false;
-        //ˆê’èŠÔŒã‚ÉÄ“xUŒ‚‰Â”\‚É‚·‚é
+        //ä¸€å®šæ™‚é–“å¾Œã«å†åº¦æ”»æ’ƒå¯èƒ½ã«ã™ã‚‹
         StartCoroutine(ResetAttackableAfterInterval());
     }
     private IEnumerator ResetAttackableAfterInterval()

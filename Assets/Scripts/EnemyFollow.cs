@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public Transform player; // ƒvƒŒƒCƒ„[‚ÌTransform
+    public Transform player; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transform
     private NavMeshAgent agent;
 
     void Start()
@@ -15,7 +15,7 @@ public class EnemyFollow : MonoBehaviour
     {
         if (player != null)
         {
-            agent.SetDestination(player.position); // ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ÉŒü‚©‚Á‚ÄˆÚ“®
+            agent.SetDestination(player.position); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã«å‘ã‹ã£ã¦ç§»å‹•
         }
     }
 }
