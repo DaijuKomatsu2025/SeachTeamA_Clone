@@ -27,6 +27,7 @@ public class EnemyStatus : CommonStatus
     protected override void OnDie()
     {
         OnEnemyDie?.Invoke(this);
+        base.OnDie();
         //StartCoroutine(DestroyCoroutine());
     }
     
