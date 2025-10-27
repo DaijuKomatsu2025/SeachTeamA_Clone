@@ -123,9 +123,13 @@
 - **フォルダ構成推奨**
 ```
 Assets/
+├─ Animations/
 ├─ Scripts/
 ├─ Prefabs/
+│   ├─ Stage/
 ├─ Materials/
+│   ├─ Character/
+│   ├─ Stage/
 ├─ Scenes/
 ├─ UI/
 └─ Audio/
