@@ -15,6 +15,19 @@ public class EnemyStatus : CommonStatus
     }
     protected void Update()
     {
-        animator.SetFloat("MoveSpeed", agent.velocity.magnitude);//ˆÚ“®‘¬“x‚É‰ž‚¶‚ÄƒAƒjƒ[ƒVƒ‡ƒ“‚ð•Ï‰»‚³‚¹‚é
+        animator.SetFloat("MoveSpeed", agent.velocity.magnitude);//ï¿½Ú“ï¿½ï¿½ï¿½ï¿½xï¿½É‰ï¿½ï¿½ï¿½ï¿½ÄƒAï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
+    private OnDieEvent OnEnemyDie = new OnDieEvent();
+
+    public OnDieEvent EnewmyDieEvent => OnEnemyDie;
+
+    [System.Serializable]
+    public class OnDieEvent : UnityEvent<EnemyStatus> { }
+
+    protected override void OnDie()
+    {
+        OnEnemyDie?.Invoke(this);
+        StartCoroutine(DestroyCoroutine());
+    }
+    
 }
