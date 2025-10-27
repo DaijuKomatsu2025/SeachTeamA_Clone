@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5155940675426136280, guid: 35e5cc22f6ca12d45a533cf953dd4298, type: 3}
+      propertyPath: m_Size.z
+      value: 1.6144569
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155940675426136280, guid: 35e5cc22f6ca12d45a533cf953dd4298, type: 3}
+      propertyPath: m_Center.z
+      value: -2.4400172
+      objectReference: {fileID: 0}
     - target: {fileID: 8566659516536052116, guid: 35e5cc22f6ca12d45a533cf953dd4298, type: 3}
       propertyPath: m_Name
       value: Hint2_D Variant

@@ -36,6 +36,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hint4_R Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2937029273740864204, guid: 715bdaf0606860446abd81e4542c7e7b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5892222
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937029273740864204, guid: 715bdaf0606860446abd81e4542c7e7b, type: 3}
+      propertyPath: m_Center.x
+      value: 2.5283499
+      objectReference: {fileID: 0}
     - target: {fileID: 4841733497561032527, guid: 715bdaf0606860446abd81e4542c7e7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3

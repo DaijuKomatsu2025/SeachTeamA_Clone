@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1652266174549041935, guid: e5ceb1b2640001a479920552ca5aea0c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6581349
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652266174549041935, guid: e5ceb1b2640001a479920552ca5aea0c, type: 3}
+      propertyPath: m_Size.z
+      value: 2.0584853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652266174549041935, guid: e5ceb1b2640001a479920552ca5aea0c, type: 3}
+      propertyPath: m_Center.x
+      value: -2.5402596
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652266174549041935, guid: e5ceb1b2640001a479920552ca5aea0c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.021132827
+      objectReference: {fileID: 0}
     - target: {fileID: 2846680270956481091, guid: e5ceb1b2640001a479920552ca5aea0c, type: 3}
       propertyPath: m_Name
       value: Hint3_L Variant
