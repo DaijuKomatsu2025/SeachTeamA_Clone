@@ -1901,7 +1901,7 @@ MonoBehaviour:
   - {fileID: 1850165099963450240, guid: 715bdaf0606860446abd81e4542c7e7b, type: 3}
   - {fileID: 7379872405398288632, guid: ee5d3d97ef379a04e8f26690489cd805, type: 3}
   _messageWindow: {fileID: 1921767705}
-  _uiController: {fileID: 355913211}
+  _uiController: {fileID: 0}
   _parent: {fileID: 1651351604}
 --- !u!1 &1653825841
 GameObject:
