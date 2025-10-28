@@ -2,21 +2,24 @@
 
 public class HintMessage : MonoBehaviour
 {
+    private MessageWindow messageWindow;
     [SerializeField] private string[] _hintText;
     private string _currentMsg = "未設定";
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(_currentMsg);
+        messageWindow.ShowMessageWindow (_currentMsg);
     }
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("ヒント表示オフ");
+        messageWindow.HideMessageWindow();
     }
 
-    public void SetCurrentMessage(int num)
+    public void SetCurrentMessage(int num, MessageWindow messageCanvas)
     {
-        if(_hintText.Length >= num)
+        this.messageWindow = messageCanvas;
+
+        if (_hintText.Length >= num)
         {
             _currentMsg = _hintText[num];
         }

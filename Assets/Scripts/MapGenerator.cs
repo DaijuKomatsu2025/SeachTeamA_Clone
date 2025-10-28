@@ -15,6 +15,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject[] _nearWalls;
     [SerializeField] private GameObject[] _bigWalls;
     [SerializeField] private GameObject[] _hintObjects;
+    [SerializeField] private MessageWindow _messageWindow;
 
     [SerializeField] private Transform _parent;
     private Vector3 _newPosition;
@@ -136,7 +137,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     _newPosition = new Vector3(-x * 7.5f, 0, -y * 7.5f);
                     var hint = Instantiate(_hintObjects[2], pos, Quaternion.identity, _parent);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(0);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(0, _messageWindow);
                 }
                 else if (cells[y] == "N0")
                 {
@@ -155,25 +156,25 @@ public class MapGenerator : MonoBehaviour
                 {
                     var hint = Instantiate(_hintObjects[0], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
                 }
                 else if (cells[y].StartsWith("D"))
                 {
                     var hint = Instantiate(_hintObjects[1], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
                 }
                 else if (cells[y].StartsWith("L"))
                 {
                     var hint = Instantiate(_hintObjects[2], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
                 }
                 else if (cells[y].StartsWith("R"))
                 {
                     var hint = Instantiate(_hintObjects[3], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
                 }
                 else if (cells[y].StartsWith("B"))
                 {
