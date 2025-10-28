@@ -17,6 +17,15 @@ public class EnemyFollow : MonoBehaviour
         if (player != null)
         {
             agent.SetDestination(player.position); // プレイヤーの位置に向かって移動
+            //一定距離内に入ったら停止
+            if (Vector3.Distance(transform.position, player.position) < 2.0f)
+            {
+                agent.isStopped = true; // プレイヤーに近づいたら停止
+            }
+            else
+            {
+                agent.isStopped = false; // プレイヤーから離れたら移動再開
+            }
         }
     }
 }
