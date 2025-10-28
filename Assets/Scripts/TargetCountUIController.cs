@@ -13,7 +13,7 @@ public class TargetCountUIController : MonoBehaviour
     // [SerializeField] 
     // private UnityEngine.UI.Image targetIconImage; 
 
-    private const string TEXT_FORMAT = "{1}/{0}";
+    private const string TEXT_FORMAT = "{0}/{1}";
 
     // 最大ターゲット数を保持する変数
     private int _maxTargets = 0;
@@ -39,7 +39,7 @@ public class TargetCountUIController : MonoBehaviour
     /// 外部スクリプト（スポナー/イベントスクリプト）から呼び出され、ターゲット数を更新する
     /// </summary>
     /// <param name="count">現在のターゲットの残り数</param>
-    public void UpdateTargetCount(int currentCount)
+    public void UpdateTargetCount(int currentCount, int maxTargets)
     {
         // ターゲット数が0より大きい場合（表示開始/更新）
         if (currentCount > 0)
@@ -61,7 +61,7 @@ public class TargetCountUIController : MonoBehaviour
             if (targetCountText != null)
             {
                 // 💡 ここで残り数(currentCount)と最大数(_maxTargets)を渡す
-                targetCountText.text = string.Format(TEXT_FORMAT, currentCount, _maxTargets);
+                targetCountText.text = string.Format(TEXT_FORMAT, currentCount, maxTargets);
             }
         }
         // ターゲット数が0以下の場合（表示終了）

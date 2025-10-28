@@ -127,7 +127,7 @@ public class SpawnerAnnihilate : MonoBehaviour
         // UIコントローラーに通知
         if (_uiController != null)
         {
-            _uiController.UpdateTargetCount(remainingCount);
+            _uiController.UpdateTargetCount(remainingCount, _maxSpawnCount);
         }
     }
 
