@@ -1,10 +1,10 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(CommonAttack))]
-
 
 public class PlayerController : CommonStatus
 {
@@ -17,7 +17,12 @@ public class PlayerController : CommonStatus
     private Vector3 moveVelocity;//移動速度ベクトル
     private InputAction move;//移動入力アクション
     private InputAction _attack;//攻撃入力アクション
-
+    public float StopSpeed = 0.01f;//停止速度
+    public float StopTime = 0;//停止時間
+    private bool isStopping = false;//停止中かどうか
+    private Vector3 LastPostion;//最後の位置
+    [SerializeField]
+    private CinemachineCamera StopCamera;
 
 
     void Start()
@@ -27,15 +32,16 @@ public class PlayerController : CommonStatus
         var inputActionAsset = GetComponent<PlayerInput>().actions;
         move = inputActionAsset.FindAction("Move");//移動アクションを取得
         _attack = inputActionAsset.FindAction("Attack");//攻撃アクションを取得
-        //sprint = inputActionAsset.FindAction("Sprint"); // 走るアクションを取得追加式
-
+        LastPostion = transform.position;//初期位置を設定
     }
 
     void Update()
     {
+        if (!characterController.enabled) return;
         var inputVector = move.ReadValue<Vector2>();//移動入力ベクトルを取得
         moveVelocity = new Vector3(inputVector.x, 0, inputVector.y);//移動速度ベクトルを設定
         characterController.Move(moveVelocity * MoveSpeed * Time.deltaTime);//キャラクターを移動
+
         if (_attack.triggered)//攻撃入力があった場合
         {
             GotoAttackStateIfPossible();//攻撃状態に移行
@@ -49,5 +55,30 @@ public class PlayerController : CommonStatus
         //アニメーション処理
         animator.SetFloat("MoveSpeed", new Vector3(moveVelocity.x, 0, moveVelocity.z).magnitude);
 
+        float distance = Vector3.Distance(LastPostion, transform.position);
+        if (distance < StopSpeed)//停止している場合
+        {
+            isStopping = true;
+            StopTime += Time.deltaTime;
+            if (StopTime >= 3f)
+            {
+                StopCamera.Priority = 10;//カメラの優先度を上げる
+            }
+            else
+            {
+                StopCamera.Priority = 9;//カメラの優先度を元に戻す
+            }
+        }
+        else//移動している場合
+        {
+            isStopping = false;
+            StopTime = 0;
+        }
+        LastPostion = transform.position;//最後の位置を更新
+
+        if(state== StateEnum.Dead)
+        {
+            characterController.enabled = false;//キャラクターコントローラーを無効化
+        }
     }
 }

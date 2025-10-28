@@ -2452,7 +2452,6 @@ Transform:
   - {fileID: 6810106805277994032}
   - {fileID: 8220615775020516246}
   - {fileID: 5122932772935945181}
-  - {fileID: 5387841246906826237}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8237633507028048749
@@ -2549,6 +2548,9 @@ MonoBehaviour:
   attack: 10
   moveSpeed: 5
   animator: {fileID: 8237633507028048749}
+  StopSpeed: 0.01
+  StopTime: 0
+  StopCamera: {fileID: 0}
 --- !u!114 &4905793313501324442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2936,12 +2938,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7047227054563041819}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
-  m_LocalScale: {x: 2.25, y: 1, z: 0.7}
+  m_LocalRotation: {x: -0.010255531, y: 0.010733259, z: 0.9425279, w: -0.33379766}
+  m_LocalPosition: {x: 0.2067246, y: 0.12623148, z: 0.54766846}
+  m_LocalScale: {x: 2.2499998, y: 1, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1830116207263166804}
+  m_Father: {fileID: 7926002703909867219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7773879585025947990
 BoxCollider:
@@ -2962,8 +2964,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.12, y: 0.15, z: 3}
+  m_Center: {x: 0.1, y: 0, z: 0.44}
 --- !u!54 &1814219194688555955
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4365,7 +4367,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -4216859302048453862, guid: 00ee1ce116088f34f8e78f315f67212e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5387841246906826237}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00ee1ce116088f34f8e78f315f67212e, type: 3}
 --- !u!4 &7926002703909867219 stripped

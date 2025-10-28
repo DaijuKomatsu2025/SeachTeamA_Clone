@@ -737,6 +737,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6366672497113411311, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
+      propertyPath: hp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366672497113411311, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
+      propertyPath: StopCamera
+      value: 
+      objectReference: {fileID: 1049146098}
     - target: {fileID: 6839390780294441217, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
       propertyPath: m_Name
       value: MainCharactor
