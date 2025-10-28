@@ -20,16 +20,15 @@ public class SpawnerAnnihilate : MonoBehaviour
     private void Start()
     {
         _isSpawning = false;
+    }
 
-        // スポナーがインスタンス化された瞬間に、シーン内からUIコントローラーを探して取得
-        _uiController = FindFirstObjectByType<TargetCountUIController>();
-
-        //スポナー接触時の確認用なので取れるまではコメントアウトにしときます
-        //if (_uiController == null)
-        //{
-        //    Debug.LogWarning("シーン内に TargetCountUIController が見つかりませんでした。敵の残り数は表示されません。");
-        //}
-
+    public void SetUiController(TargetCountUIController uiController)
+    {
+        this._uiController = uiController;
+        if (this._uiController != null)
+        {
+            Debug.Log("uiController attached");
+        }
     }
 
     IEnumerator SpawnLoop()
@@ -38,7 +37,7 @@ public class SpawnerAnnihilate : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("swawnCount:" + _spawnCount);
+            Debug.Log("swawnCount:" + _spawnCount); 
 
             if(_isSpawning && SpawnedEnemies.Count == 0)
             {
