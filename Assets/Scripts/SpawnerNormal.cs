@@ -52,7 +52,7 @@ public class SpawnerNormal : MonoBehaviour
                     var enemyStatus = enemy.GetComponent<EnemyStatus>();
                     if (enemyStatus != null)
                     {
-                        enemyStatus.gameObject.GetComponent<EnemyFollow>().player = _target;
+                        enemyStatus.gameObject.GetComponent<EnemyFollow_Bat>().player = _target;
                         enemyStatus.EnewmyDieEvent.AddListener(OnEnemyDefeated);
                         SpawnedEnemies.Add(enemyStatus);
                         _spawnCount++;

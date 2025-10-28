@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerN
   _enemyPrefabs:
-  - {fileID: 5381961985419166852, guid: 0b45e4bed0ae5e443be4b80c1181719e, type: 3}
+  - {fileID: 4692092079593511437, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
   _collider: {fileID: 7471041029216409123}
   _spawnDuration: 10
   _maxSpawnCount: 1

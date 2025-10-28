@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SecretWall : MonoBehaviour
 {
@@ -7,11 +7,11 @@ public class SecretWall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Contains("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             _num++;
             Debug.Log("hit:" + _num);
-            if (_num >= 5) _wall.SetActive(false);
+            if (_num >= 3) _wall.SetActive(false);
         }
     }
 }

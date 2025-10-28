@@ -1,10 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+using UnityEngine;
 
 public class HintMessage : MonoBehaviour
 {
     private MessageWindow messageWindow;
-    [SerializeField] private string[] _hintText;
+    private string[] _hintTexts;
+
+    private string _path = @"Assets\StreamingAssets\hints.csv";
+    private string[] _readLines = default!;
+
     private string _currentMsg = "未設定";
+
+    private void Awake()
+    {
+        ReadData();
+    }
+
+    private void ReadData()
+    {
+        try
+        {
+            _hintTexts = File.ReadAllLines(_path);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"{_path} 読み込みエラー: {ex.Message}");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,9 +42,9 @@ public class HintMessage : MonoBehaviour
     {
         this.messageWindow = messageCanvas;
 
-        if (_hintText.Length >= num)
+        if (_hintTexts.Length >= num)
         {
-            _currentMsg = _hintText[num];
+            _currentMsg = _hintTexts[num];
         }
         else
         {

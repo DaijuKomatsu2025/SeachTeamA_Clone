@@ -737,6 +737,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6366672497113411311, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
+      propertyPath: hp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366672497113411311, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
+      propertyPath: StopCamera
+      value: 
+      objectReference: {fileID: 1049146098}
     - target: {fileID: 6839390780294441217, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
       propertyPath: m_Name
       value: MainCharactor
@@ -1902,6 +1910,7 @@ MonoBehaviour:
   - {fileID: 1850165099963450240, guid: 715bdaf0606860446abd81e4542c7e7b, type: 3}
   - {fileID: 7379872405398288632, guid: ee5d3d97ef379a04e8f26690489cd805, type: 3}
   _messageWindow: {fileID: 1921767705}
+  _uiController: {fileID: 355913211}
   _parent: {fileID: 1651351604}
 --- !u!1 &1653825841
 GameObject:
@@ -1914,9 +1923,8 @@ GameObject:
   - component: {fileID: 1653825842}
   - component: {fileID: 1653825844}
   - component: {fileID: 1653825843}
-  - component: {fileID: 1653825845}
   m_Layer: 5
-  m_Name: MessageWindowText (TMP)
+  m_Name: MessageWindowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2040,19 +2048,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653825841}
   m_CullTransparentMesh: 1
---- !u!114 &1653825845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653825841}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48517bb2ff4e65e4a89d0a17fc39484b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargetDisplayManager
-  targetCountText: {fileID: 0}
 --- !u!1 &1743861182
 GameObject:
   m_ObjectHideFlags: 0

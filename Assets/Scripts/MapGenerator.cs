@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject[] _bigWalls;
     [SerializeField] private GameObject[] _hintObjects;
     [SerializeField] private MessageWindow _messageWindow;
+    [SerializeField] private TargetCountUIController _uiController;
 
     [SerializeField] private Transform _parent;
     private Vector3 _newPosition;
@@ -150,7 +151,8 @@ public class MapGenerator : MonoBehaviour
                 }
                 else if (cells[y] == "A1")
                 {
-                    Instantiate(_spawnA_Walls[0], pos, Quaternion.identity, _parent);
+                    var aw = Instantiate(_spawnA_Walls[0], pos, Quaternion.identity, _parent);
+                    aw.GetComponentInChildren<SpawnerAnnihilate>().SetUiController(_uiController);
                 }
                 else if (cells[y].StartsWith("U"))
                 {

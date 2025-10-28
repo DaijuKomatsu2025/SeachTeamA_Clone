@@ -13,7 +13,7 @@ public class TargetCountUIController : MonoBehaviour
     // [SerializeField] 
     // private UnityEngine.UI.Image targetIconImage; 
 
-    private const string TEXT_FORMAT = "{0}/{1}";
+    private const string TEXT_FORMAT = "{1}/{0}";
 
     // 最大ターゲット数を保持する変数
     private int _maxTargets = 0;
