@@ -3,11 +3,10 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using System.Collections;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyStatus : CommonStatus
 {
-    private NavMeshAgent agent;
 
+    private NavMeshAgent agent;
     protected override void Start()
     {
         base.Start();
@@ -30,14 +29,14 @@ public class EnemyStatus : CommonStatus
     {
         OnEnemyDie?.Invoke(this);
         base.OnDie();
-        agent.isStopped = true;
+        //agent.isStopped = true;
         // StartCoroutine(DestroyCoroutine());
     }
 
     public override void GotoAttackStateIfPossible()
     {
-        if(!IsAlive)return;
-        agent.isStopped = true;
+        if (!IsAlive) return;
+        //agent.isStopped = true;
         base.GotoAttackStateIfPossible();
         // 数秒後に移動を再開する
         StartCoroutine(ResumeMovementAfterDelay(1.0f));
@@ -46,6 +45,6 @@ public class EnemyStatus : CommonStatus
     private IEnumerator ResumeMovementAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        agent.isStopped = false;
+        //agent.isStopped = false;
     }
 }
