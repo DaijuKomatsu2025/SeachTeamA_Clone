@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+ï»¿using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,20 +9,25 @@ using UnityEngine.InputSystem;
 public class PlayerController : CommonStatus
 {
     //[SerializeField]
-    //private float MoveSpeed;//ˆÚ“®‘¬“x
+    //private float MoveSpeed;//ç§»å‹•é€Ÿåº¦
     //[SerializeField]
-    //private Animator animator;//ƒAƒjƒ[ƒ^[ƒRƒ“ƒ|[ƒlƒ“ƒg
-    private CharacterController characterController;// ƒLƒƒƒ‰ƒNƒ^[ƒRƒ“ƒgƒ[ƒ‰[ƒRƒ“ƒ|[ƒlƒ“ƒg
-    private Transform transform;// ƒvƒŒƒCƒ„[‚ÌTransformƒRƒ“ƒ|[ƒlƒ“ƒg
-    private Vector3 moveVelocity;//ˆÚ“®‘¬“xƒxƒNƒgƒ‹
-    private InputAction move;//ˆÚ“®“ü—ÍƒAƒNƒVƒ‡ƒ“
-    private InputAction _attack;//UŒ‚“ü—ÍƒAƒNƒVƒ‡ƒ“
-    public float StopSpeed = 0.01f;//’â~‘¬“x
-    public float StopTime = 0;//’â~ŠÔ
-    private bool isStopping = false;//’â~’†‚©‚Ç‚¤‚©
-    private Vector3 LastPostion;//ÅŒã‚ÌˆÊ’u
+    //private Animator animator;//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private CharacterController characterController;// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private Transform transform;// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private Vector3 moveVelocity;//ç§»å‹•é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«
+    private InputAction move;//ç§»å‹•å…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
+    private InputAction _attack;//æ”»æ’ƒå…¥åŠ›ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
+    public float StopSpeed = 0.01f;//åœæ­¢é€Ÿåº¦
+    public float StopTime = 0;//åœæ­¢æ™‚é–“
+    private bool isStopping = false;//åœæ­¢ä¸­ã‹ã©ã†ã‹
+    private Vector3 LastPostion;//æœ€å¾Œã®ä½ç½®
     [SerializeField]
     private CinemachineCamera StopCamera;
+
+    //ã‚¿ã‚¤ãƒãƒ¼ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãŸã‚ã®å‚ç…§
+    private Timer _timer;
+
+    private MessageUIController _messageController;// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸UIã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã¸ã®å‚ç…§
 
 
     void Start()
@@ -30,55 +35,78 @@ public class PlayerController : CommonStatus
         characterController = GetComponent<CharacterController>();
         transform = GetComponent<Transform>();
         var inputActionAsset = GetComponent<PlayerInput>().actions;
-        move = inputActionAsset.FindAction("Move");//ˆÚ“®ƒAƒNƒVƒ‡ƒ“‚ğæ“¾
-        _attack = inputActionAsset.FindAction("Attack");//UŒ‚ƒAƒNƒVƒ‡ƒ“‚ğæ“¾
-        LastPostion = transform.position;//‰ŠúˆÊ’u‚ğİ’è
+        move = inputActionAsset.FindAction("Move");//ç§»å‹•ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—
+        _attack = inputActionAsset.FindAction("Attack");//æ”»æ’ƒã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—
+        LastPostion = transform.position;//åˆæœŸä½ç½®ã‚’è¨­å®š
+
+        _messageController = FindFirstObjectByType<MessageUIController>(FindObjectsInactive.Include);
+
+        //Timer ã‚¯ãƒ©ã‚¹ã®å‚ç…§ã‚’å–å¾—
+        _timer = FindFirstObjectByType<Timer>();
+
+        //MessageUIController ã®å‚ç…§ã‚’å–å¾—
+        _messageController = FindFirstObjectByType<MessageUIController>(FindObjectsInactive.Include);
+
     }
 
     void Update()
     {
         if (!characterController.enabled) return;
-        var inputVector = move.ReadValue<Vector2>();//ˆÚ“®“ü—ÍƒxƒNƒgƒ‹‚ğæ“¾
-        moveVelocity = new Vector3(inputVector.x, 0, inputVector.y);//ˆÚ“®‘¬“xƒxƒNƒgƒ‹‚ğİ’è
-        characterController.Move(moveVelocity * MoveSpeed * Time.deltaTime);//ƒLƒƒƒ‰ƒNƒ^[‚ğˆÚ“®
+        var inputVector = move.ReadValue<Vector2>();//ç§»å‹•å…¥åŠ›ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
+        moveVelocity = new Vector3(inputVector.x, 0, inputVector.y);//ç§»å‹•é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨­å®š
+        characterController.Move(moveVelocity * MoveSpeed * Time.deltaTime);//ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚’ç§»å‹•
 
-        if (_attack.triggered)//UŒ‚“ü—Í‚ª‚ ‚Á‚½ê‡
+        if (_attack.triggered)//æ”»æ’ƒå…¥åŠ›ãŒã‚ã£ãŸå ´åˆ
         {
-            GotoAttackStateIfPossible();//UŒ‚ó‘Ô‚ÉˆÚs
+            GotoAttackStateIfPossible();//æ”»æ’ƒçŠ¶æ…‹ã«ç§»è¡Œ
         }
-        //ˆÚ“®•ûŒü‚ÉŒü‚¯‚é
+        //ç§»å‹•æ–¹å‘ã«å‘ã‘ã‚‹
         transform.LookAt(transform.position + new Vector3(moveVelocity.x, 0, moveVelocity.z));
 
-        //d—Íˆ—
+        //é‡åŠ›å‡¦ç†
         moveVelocity.y += Physics.gravity.y * Time.deltaTime;
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‡¦ç†
         animator.SetFloat("MoveSpeed", new Vector3(moveVelocity.x, 0, moveVelocity.z).magnitude);
 
         float distance = Vector3.Distance(LastPostion, transform.position);
-        if (distance < StopSpeed)//’â~‚µ‚Ä‚¢‚éê‡
+        if (distance < StopSpeed)//åœæ­¢ã—ã¦ã„ã‚‹å ´åˆ
         {
             isStopping = true;
             StopTime += Time.deltaTime;
             if (StopTime >= 3f)
             {
-                StopCamera.Priority = 10;//ƒJƒƒ‰‚Ì—Dæ“x‚ğã‚°‚é
+                StopCamera.Priority = 10;//ã‚«ãƒ¡ãƒ©ã®å„ªå…ˆåº¦ã‚’ä¸Šã’ã‚‹
             }
             else
             {
-                StopCamera.Priority = 9;//ƒJƒƒ‰‚Ì—Dæ“x‚ğŒ³‚É–ß‚·
+                StopCamera.Priority = 9;//ã‚«ãƒ¡ãƒ©ã®å„ªå…ˆåº¦ã‚’å…ƒã«æˆ»ã™
             }
         }
-        else//ˆÚ“®‚µ‚Ä‚¢‚éê‡
+        else//ç§»å‹•ã—ã¦ã„ã‚‹å ´åˆ
         {
             isStopping = false;
             StopTime = 0;
         }
-        LastPostion = transform.position;//ÅŒã‚ÌˆÊ’u‚ğXV
+        LastPostion = transform.position;//æœ€å¾Œã®ä½ç½®ã‚’æ›´æ–°
 
         if(state== StateEnum.Dead)
         {
-            characterController.enabled = false;//ƒLƒƒƒ‰ƒNƒ^[ƒRƒ“ƒgƒ[ƒ‰[‚ğ–³Œø‰»
+            characterController.enabled = false;//ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’ç„¡åŠ¹åŒ–
+
+            if (_timer != null)
+            {
+                // StopAndResetTimer(true) ã‚’å‘¼ã³å‡ºã—ã€åœæ­¢ã¨ãƒªã‚»ãƒƒãƒˆã‚’å®Ÿè¡Œ
+                _timer.StopAndResetTimer(true);
+            }
+
+
+            if (_messageController != null)//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸UIã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’ç¢ºèªã—ã¦å…¨æ»…ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å…¥ã‚Œã‚‹
+            {
+                // MessageType.PlayerDefeated ã‚’æŒ‡å®šã—ã¦å‘¼ã³å‡ºã™
+                _messageController.ShowMessage(MessageUIController.MessageType.PlayerDefeated);
+            }
+
         }
     }
 }

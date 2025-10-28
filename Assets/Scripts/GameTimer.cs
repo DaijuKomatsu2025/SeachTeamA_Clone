@@ -23,9 +23,17 @@ public class Timer : MonoBehaviour
     // シェシェイクの継続時間
     public float shakeDuration = 0.5f;
 
-    private bool isShaking = false;
-    private bool isOneMinutePassed = false;
+    private bool isShaking = false;//シェイク中かどうかのフラグ
+    private bool isOneMinutePassed = false;//1分を切ったかどうかのフラグ
     private Vector3 originalPosition; // テキストの初期位置
+
+    //タイマーの進行状態を管理するフラグ
+    private bool _isTimerRunning = true;
+
+    // 初期値（リセット用）を保持する変数
+    private float _initialTime;
+
+    private MessageUIController _messageController;// メッセージUIコントローラーへの参照
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,18 +52,19 @@ public class Timer : MonoBehaviour
         {
             originalPosition = timeText.transform.localPosition;
         }
+
+        // 初期値を保存 (リセット用)
+        _initialTime = totalTime;
+
+        _messageController = FindFirstObjectByType<MessageUIController>(FindObjectsInactive.Include);// MessageUIController の参照を取得
+
     }
     // Update is called once per frame
     void Update()
     {
-        if (totalTime > 0f)
+        if (_isTimerRunning && totalTime > 0f)
         {
-            if (totalTime <= 0f)
-            {
-                // 時間がゼロになったら、一度だけ終了処理を呼び出す
-                HandleTimerEnd();
-                return; // ここでUpdateを終了し、下の処理は実行しない
-            }
+          
 
             // 時間を更新して表示するメソッドを呼び出します
             UpdateTimeDisplay(totalTime);
@@ -68,10 +77,12 @@ public class Timer : MonoBehaviour
                 // 60秒を切ったときから、5秒ごとのシェイクをチェックする
                 CheckAndStartShake();
             }
-            //タイマー0になったらタイマーとシェイクチェックを止める
-            if (totalTime == 0f)
-            {
 
+            if (totalTime <= 0f)
+            {
+                // 時間がゼロになったら、一度だけ終了処理を呼び出す
+                HandleTimerEnd();
+                return; // ここでUpdateを終了し、下の処理は実行しない
             }
         }
     }
@@ -90,6 +101,13 @@ public class Timer : MonoBehaviour
 
         // 4. テキストの位置を初期位置に戻す
         timeText.transform.localPosition = originalPosition;
+
+
+        if (_messageController != null)//メッセージUIコントローラーが存在する場合
+        {
+            _messageController.ShowMessage(MessageUIController.MessageType.TimeUp);//時間切れメッセージを表示
+        }
+
 
         // 5. ゲームの次のアクション（例：ゲームオーバー画面の表示）
         Debug.Log("タイムアップ！ゲームを停止します。");
@@ -178,6 +196,28 @@ public class Timer : MonoBehaviour
         timeText.transform.localPosition = originalPosition;
         isShaking = false;
     }//シェイクコルーチン
+
+    public void StopAndResetTimer(bool shouldReset)
+    {
+        _isTimerRunning = false; // 1. タイマーの進行を停止
+        StopAllCoroutines();     // 2. 実行中のシェイクコルーチンを全て停止
+
+        // 3. テキストの位置を初期位置に戻す
+        if (timeText != null)
+        {
+            timeText.transform.localPosition = originalPosition;
+        }
+
+        if (shouldReset)
+        {
+            // 4. タイマーを初期値に戻す
+            totalTime = _initialTime;
+            // 5. 表示をリセット後の時間に更新
+            UpdateTimeDisplay(totalTime);
+            // 6. 色を初期状態（白）に戻す
+            if (tmpText != null) { tmpText.color = Color.white; }
+        }
+    }
 
 
 }

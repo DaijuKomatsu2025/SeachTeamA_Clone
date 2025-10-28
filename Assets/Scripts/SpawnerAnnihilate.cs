@@ -13,6 +13,8 @@ public class SpawnerAnnihilate : MonoBehaviour
     private Transform _target;
     private bool _isSpawning;
 
+    private MessageUIController _messageController;// メッセージUIコントローラーへの参照
+
     private TargetCountUIController _uiController;
 
     public List<EnemyStatus> SpawnedEnemies { get; set; } = new List<EnemyStatus>();
@@ -20,6 +22,8 @@ public class SpawnerAnnihilate : MonoBehaviour
     private void Start()
     {
         _isSpawning = false;
+
+        _messageController = FindFirstObjectByType<MessageUIController>(FindObjectsInactive.Include);// MessageUIController の参照を取得
     }
 
     public void SetUiController(TargetCountUIController uiController)
@@ -90,6 +94,13 @@ public class SpawnerAnnihilate : MonoBehaviour
             GameModeManager.SetGameMode(GameModeManager.GameMode.Annihilate);
             _target = other.transform;
             StartCoroutine(SpawnLoop());
+
+            if (_messageController != null)// メッセージUIコントローラーが存在する場合
+            {
+                _messageController.ShowMessage(MessageUIController.MessageType.EnterMonsterHouse);// 敵を全部倒せ！メッセージを表示
+            }
+
+
         }
     }
 
