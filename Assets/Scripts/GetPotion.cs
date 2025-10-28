@@ -6,7 +6,12 @@ public class GetPotion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Heal!");
-        Destroy(gameObject);
+        if ((other.gameObject.tag.Contains("Player")))
+        {
+            // HP回復処理
+
+            Debug.Log("Heal!");
+            Destroy(gameObject);
+        }
     }
 }   

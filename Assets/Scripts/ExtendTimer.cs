@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ExtendTimer : MonoBehaviour
 {
@@ -6,7 +6,12 @@ public class ExtendTimer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Time extend!");
-        Destroy(gameObject);
+        if ((other.gameObject.tag.Contains("Player")))
+        {
+            // 時間延長処理
+
+            Debug.Log("Time extend!");
+            Destroy(gameObject);
+        }
     }
 }
