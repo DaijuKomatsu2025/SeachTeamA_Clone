@@ -10,7 +10,7 @@ public class CommonStatus : MonoBehaviour
         Attacking,
         Dead
     }
-    [SerializeField] private int hp;//体力
+    [SerializeField] public int hp;//体力
     [SerializeField] private int maxHp;//最大体力
     [SerializeField] public int attack;//攻撃力
     [SerializeField] private float moveSpeed;//移動速度
@@ -20,7 +20,7 @@ public class CommonStatus : MonoBehaviour
     public bool IsAttackable => StateEnum.Normal == state;//攻撃可能かどうか
     public bool IsAlive => StateEnum.Dead != state;//生存しているかどうか
     protected StateEnum state = StateEnum.Normal;//状態
-    
+
     [SerializeField] protected Animator animator;//アニメーター
 
     protected virtual void Start()
@@ -31,6 +31,7 @@ public class CommonStatus : MonoBehaviour
     protected virtual void OnDie()//死んだときの処理
     {
         state = StateEnum.Dead;
+        animator.ResetTrigger("Attack");
         animator.SetTrigger("Die");
         //死んだら数秒後消える
         Destroy(gameObject, 3.0f);
@@ -53,6 +54,18 @@ public class CommonStatus : MonoBehaviour
         hp -= attack;
         if (hp > 0) return;
         OnDie();
+    }
+    //回復
+    public int Heal(int healAmount)
+    {
+        if (state == StateEnum.Dead) return 0;
+        int preHp = hp;
+        hp += healAmount;
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+        return hp - preHp;
     }
     public int GetMaxHp()
     {

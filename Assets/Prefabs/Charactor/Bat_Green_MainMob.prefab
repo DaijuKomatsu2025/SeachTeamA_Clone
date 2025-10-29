@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 7341144067539299724}
   - component: {fileID: 7633118130885053934}
   - component: {fileID: 2134869330396205933}
-  - component: {fileID: 5445490382664622087}
+  - component: {fileID: -8785786207719691525}
   m_Layer: 7
   m_Name: Bat_Green_MainMob
   m_TagString: Untagged
@@ -955,7 +955,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &5445490382664622087
+--- !u!114 &-8785786207719691525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

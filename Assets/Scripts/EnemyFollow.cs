@@ -27,5 +27,15 @@ public class EnemyFollow : MonoBehaviour
                 agent.isStopped = false; // プレイヤーから離れたら移動再開
             }
         }
+        //死んだらNavMeshAgentを停止
+        var status = GetComponent<CommonStatus>();
+        if (status != null)
+        {
+            if (!status.IsAlive)
+            {
+                agent.isStopped = true;
+            }
+
+        }
     }
 }

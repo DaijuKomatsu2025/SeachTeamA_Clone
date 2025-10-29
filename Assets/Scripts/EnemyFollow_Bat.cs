@@ -10,6 +10,7 @@ public class EnemyFollow_Bat : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+
     }
 
     void Update()
@@ -27,5 +28,14 @@ public class EnemyFollow_Bat : MonoBehaviour
                 agent.isStopped = false; // プレイヤーから離れたら移動再開
             }
         }
+        //死んだらNavMeshAgentを停止
+        var status = GetComponent<CommonStatus>();
+
+        if (status != null && !status.IsAlive)
+        {
+
+            agent.isStopped = true;
+        }
+
     }
 }
