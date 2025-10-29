@@ -2312,6 +2312,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3108189292256497274, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 192830133}
     - target: {fileID: 4989800327457539522, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_Name
       value: ExtendTimer
@@ -3764,6 +3768,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1774830383}
     m_Modifications:
+    - target: {fileID: 6156425254217598159, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
+      propertyPath: _status
+      value: 
+      objectReference: {fileID: 1052669872}
     - target: {fileID: 7501999900041993272, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_Name
       value: Potion

@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67650e8d8f5884478b2e6dcebe9e972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExtendTimer
-  _extendTime: 60
+  _extendTime: 30
+  _timer: {fileID: 0}
 --- !u!1001 &3358320360837011373
 PrefabInstance:
   m_ObjectHideFlags: 0

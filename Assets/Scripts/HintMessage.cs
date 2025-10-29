@@ -8,7 +8,6 @@ public class HintMessage : MonoBehaviour
     private string[] _hintTexts;
 
     private string _path = @"Assets\StreamingAssets\hints.csv";
-    private string[] _readLines = default!;
 
     private string _currentMsg = "未設定";
 
