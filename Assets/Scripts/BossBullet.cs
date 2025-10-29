@@ -27,5 +27,9 @@ public class BossBullet : MonoBehaviour
             status.Damage((int)damage);
             Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
