@@ -919,9 +919,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8785786207719691525, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 906396783}
+    - target: {fileID: 2003467809806473634, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3111564613337031093, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.694
+      value: -1.86
       objectReference: {fileID: 0}
     - target: {fileID: 3111564613337031093, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
       propertyPath: m_LocalPosition.y
@@ -962,6 +970,10 @@ PrefabInstance:
     - target: {fileID: 4692092079593511437, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
       propertyPath: m_Name
       value: Bat_Green_MainMob
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633118130885053934, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
+      propertyPath: attack
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1609,6 +1621,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3007254662763254846, guid: e2a82471e2e1aae4080d0331a40875b5, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823139936861580585, guid: e2a82471e2e1aae4080d0331a40875b5, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9214210478300775156, guid: e2a82471e2e1aae4080d0331a40875b5, type: 3}
