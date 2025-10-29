@@ -38,7 +38,7 @@ public class SpawnerBoss : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("swawnCount:" + _spawnCount); 
+            //Debug.Log("swawnCount:" + _spawnCount); 
 
             if(_isSpawning && SpawnedEnemies.Count == 0)
             {
