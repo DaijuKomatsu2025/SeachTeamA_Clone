@@ -3,14 +3,13 @@
 public class ExtendTimer : MonoBehaviour
 {
     [SerializeField] private float _extendTime = 60f;
+    [SerializeField] private Timer _timer;
 
     private void OnTriggerEnter(Collider other)
     {
         if ((other.gameObject.tag.Contains("Player")))
         {
-            // 時間延長処理
-
-            Debug.Log("Time extend!");
+            _timer.RecoverTimes();
             Destroy(gameObject);
         }
     }
