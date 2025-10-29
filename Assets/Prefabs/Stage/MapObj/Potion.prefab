@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 9130622350208868107}
   - component: {fileID: 5282598466066284380}
   - component: {fileID: 6156425254217598159}
+  - component: {fileID: -2664825617654701805}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Untagged
@@ -214,6 +215,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GetPotion
   _healPoint: 10
+--- !u!114 &-2664825617654701805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7501999900041993272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a3e887d13247148a039a67bcad0fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  type: 0
 --- !u!1001 &2670723272315345024
 PrefabInstance:
   m_ObjectHideFlags: 0
