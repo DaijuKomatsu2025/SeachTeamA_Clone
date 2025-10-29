@@ -10,7 +10,7 @@ public class CommonStatus : MonoBehaviour
         Attacking,
         Dead
     }
-    [SerializeField] private int hp;//‘Ì—Í
+    [SerializeField] public int hp;//‘Ì—Í
     [SerializeField] private int maxHp;//Å‘å‘Ì—Í
     [SerializeField] public int attack;//UŒ‚—Í
     [SerializeField] private float moveSpeed;//ˆÚ“®‘¬“x
@@ -54,6 +54,18 @@ public class CommonStatus : MonoBehaviour
         hp -= attack;
         if (hp > 0) return;
         OnDie();
+    }
+    //‰ñ•œ
+    public int Heal(int healAmount)
+    {
+        if (state == StateEnum.Dead) return 0;
+        int preHp = hp;
+        hp += healAmount;
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+        return hp - preHp;
     }
     public int GetMaxHp()
     {

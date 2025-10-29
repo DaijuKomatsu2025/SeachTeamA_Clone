@@ -9,7 +9,8 @@ public class GetPotion : MonoBehaviour
         if ((other.gameObject.tag.Contains("Player")))
         {
             // HP回復処理
-
+            var status = other.gameObject.GetComponent<CommonStatus>();
+            status.Heal((int)_healPoint);
             Debug.Log("Heal!");
             Destroy(gameObject);
         }
