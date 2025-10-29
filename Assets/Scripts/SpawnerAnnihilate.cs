@@ -29,9 +29,9 @@ public class SpawnerAnnihilate : MonoBehaviour
     public void SetUiController(TargetCountUIController uiController)
     {
         this._uiController = uiController;
-        if (this._uiController != null)
+        if (this._uiController == null)
         {
-            Debug.Log("uiController attached");
+            Debug.Log("uiController is null");
         }
     }
 
@@ -41,7 +41,7 @@ public class SpawnerAnnihilate : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("swawnCount:" + _spawnCount); 
+            //Debug.Log("swawnCount:" + _spawnCount); 
 
             if(_isSpawning && SpawnedEnemies.Count == 0)
             {
@@ -102,8 +102,6 @@ public class SpawnerAnnihilate : MonoBehaviour
             {
                 _messageController.ShowMessage(MessageUIController.MessageType.EnterMonsterHouse);// 敵を全部倒せ！メッセージを表示
             }
-
-
         }
     }
 

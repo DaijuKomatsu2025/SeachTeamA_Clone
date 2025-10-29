@@ -5,13 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GetTreasure : MonoBehaviour
 {
-    [SerializeField] private CinemachineCamera _camera;
+    [SerializeField] private CinemachineCamera _gameclearCamera;
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("お宝ゲット！！！！！！");
-        _camera.Priority.Value = 20;
-        StartCoroutine(GameClear());
+        if (other.gameObject.tag.Contains("Player"))
+        {
+            Debug.Log("お宝ゲット！！！！！！");
+            _gameclearCamera.Priority.Value = 20;
+            StartCoroutine(GameClear());
+        }
     }
 
     IEnumerator GameClear()

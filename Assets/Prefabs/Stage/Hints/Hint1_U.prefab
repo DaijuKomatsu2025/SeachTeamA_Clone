@@ -46,15 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5824c5274e4ea84c898642b8555bbab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HintMessage
-  _hintText:
-  - "<color=#CC0033><b>\u64CD\u4F5C\u65B9\u6CD5</b></color>\\n[<#CC0033>\u79FB\u52D5</b></color>]
-    WASD \u307E\u305F\u306F \u4E0A\u4E0B\u5DE6\u53F3\u30AD\u30FC\\n[\u653B\u6483]
-    Enter \u307E\u305F\u306F \u5DE6\u30AF\u30EA\u30C3\u30AF"
-  - "\u30D2\u30F3\u30C8\u305D\u306E1"
-  - "\u30D2\u30F3\u30C8\u305D\u306E2"
-  - "\u30D2\u30F3\u30C8\u305D\u306E3"
-  - "\u30D2\u30F3\u30C8\u305D\u306E4"
-  - "\u30D2\u30F3\u30C8\u305D\u306E5"
 --- !u!65 &5155940675426136280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -0.17364809
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalRotation.x
@@ -110,11 +101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.9848078
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -122,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7471257377855624353, guid: 29839553b3a09ef4ebb185722af28322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

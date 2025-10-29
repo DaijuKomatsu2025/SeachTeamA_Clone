@@ -30,11 +30,17 @@ public class HintMessage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        messageWindow.ShowMessageWindow (_currentMsg);
+        if (other.gameObject.tag.Contains("Player"))
+        {
+            messageWindow.ShowMessageWindow(_currentMsg);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        messageWindow.HideMessageWindow();
+        if (other.gameObject.tag.Contains("Player"))
+        {
+            messageWindow.HideMessageWindow();
+        }
     }
 
     public void SetCurrentMessage(int num, MessageWindow messageCanvas)

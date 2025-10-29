@@ -10,17 +10,17 @@ public class VisibleWallWhenAnnihilate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        WallSetActive();
+        if (other.gameObject.tag.Contains("Player")) WallSetActive();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        WallSetActive();
+        if (other.gameObject.tag.Contains("Player")) WallSetActive();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        WallSetActive();
+        if (other.gameObject.tag.Contains("Player")) WallSetActive();
     }
 
     private void WallSetActive()
