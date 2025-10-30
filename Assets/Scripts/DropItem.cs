@@ -7,7 +7,7 @@ public class DropItem : MonoBehaviour
     public enum itemType
     {
         Potion,
-        Timer
+        ExtendTimer
     }
     [SerializeField] private itemType type;//ƒAƒCƒeƒ€‚ÌŽí—Þ
 

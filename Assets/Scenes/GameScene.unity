@@ -4707,7 +4707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee958ff952bea674bb6927a65d1b7a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GetTreasure
-  _gameclearCamera: {fileID: 0}
+  _gameclearCamera: {fileID: 754603714}
 --- !u!1001 &1996462773
 PrefabInstance:
   m_ObjectHideFlags: 0
