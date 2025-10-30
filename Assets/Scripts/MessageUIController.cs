@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MessageUIController : MonoBehaviour
 {
@@ -49,6 +50,16 @@ public class MessageUIController : MonoBehaviour
 
     private AudioSource _audioSource;// 効果音再生用のAudioSource
 
+    [Header("リスタートUIの設定")]
+    //Inspectorから、ゲームオーバー時に表示するPanel/Canvasをアサイン
+    [SerializeField] private GameObject _restartUIPanel;
+
+    // 現在のシーン名（リスタート時に再ロードするために使用）
+    private string _currentSceneName;
+
+    private MessageType _pendingGameOverType;
+
+
     void Awake()
     {
         _rootCanvasObject = gameObject;
@@ -65,7 +76,26 @@ public class MessageUIController : MonoBehaviour
             _audioSource = gameObject.AddComponent<AudioSource>();
         }
 
+        // 現在のシーン名を記録
+        _currentSceneName = SceneManager.GetActiveScene().name;
 
+        //初期状態ではリスタートUIを非表示にしておく
+        if (_restartUIPanel != null)
+        {
+            _restartUIPanel.SetActive(false);
+        }
+
+    }
+    /// <summary>
+    /// 全滅・時間切れ時にゲームオーバー処理を実行し、リスタートUIを表示する
+    /// </summary>
+    public void GameOverAndShowRestart()
+    {
+        //スタートUIを表示
+        if (_restartUIPanel != null)
+        {
+            _restartUIPanel.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -126,6 +156,12 @@ public class MessageUIController : MonoBehaviour
         {
             setting.animator.SetTrigger(setting.animationTrigger);
         }
+        if (type == MessageUIController.MessageType.TimeUp || type == MessageUIController.MessageType.PlayerDefeated)
+        {
+            GameOverAndShowRestart();
+        }
+        //OnMessageAnimationFinished();
+
     }
 
     /// <summary>
@@ -146,5 +182,45 @@ public class MessageUIController : MonoBehaviour
             }
         }
         return null;
+    }
+    public void RestartGame()
+    {
+        // 1. 停止していた時間を再開（最重要：フリーズ解除）
+        Time.timeScale = 1f;
+
+        // 2. リスタートUIパネルを非表示
+        if (_restartUIPanel != null)
+        {
+            _restartUIPanel.SetActive(false);
+        }
+
+        // 3. 現在のシーンを再ロード（リスタート処理）
+        SceneManager.LoadScene(_currentSceneName);
+    }
+    public void SetGameOverState(MessageType type)
+    {
+        // 全滅または時間切れの時のみフラグを立てる
+        if (type == MessageType.PlayerDefeated || type == MessageType.TimeUp)
+        {
+            _pendingGameOverType = type;
+        }
+    }
+    public void OnMessageAnimationFinished()
+    {
+        // 記憶しているメッセージタイプがゲームオーバーの種類であればボタンを表示する
+        if (_pendingGameOverType == MessageType.PlayerDefeated || _pendingGameOverType == MessageType.TimeUp)
+        {
+            // 1. リスタートUIパネルを表示
+            if (_restartUIPanel != null)
+            {
+                _restartUIPanel.SetActive(true);
+            }
+
+            // 2. 次のゲームオーバー処理のためにフラグをリセット
+            //_pendingGameOverType = (MessageType)(-1); // 無効な値にリセット
+        }
+
+        //// アニメーションが終わったらメッセージテキストを非表示にする処理など...
+        //HideMessage();
     }
 }

@@ -106,6 +106,10 @@ public class PlayerController : CommonStatus
             {
                 // MessageType.PlayerDefeated を指定して呼び出す
                 _messageController.ShowMessage(MessageUIController.MessageType.PlayerDefeated);
+
+                //// UIコントローラーに「ゲームオーバー状態である」ことを通知
+                ////    これにより、UI側がアニメーション終了後にボタンを表示する準備が整う
+                //_messageController.SetGameOverState(MessageUIController.MessageType.PlayerDefeated);
             }
 
         }
