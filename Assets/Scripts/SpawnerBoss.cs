@@ -6,6 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Collider))]
 public class SpawnerBoss : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _spawnEffect;
+    [SerializeField] private AudioClip _spawnSound;
     [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private Collider _collider;
     [SerializeField] private int _maxSpawnCount = 21;
@@ -33,7 +35,20 @@ public class SpawnerBoss : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
+        if (_spawnEffect != null)
+        {
+            var eff = Instantiate(_spawnEffect, this.transform.position, Quaternion.identity);
+            eff.transform.localScale = Vector3.one * 2f;
+            eff.Play();
+        }
+
+        if (_spawnSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_spawnSound, transform.position);
+        }
+
         BossSpawn();
+
         yield return new WaitForSeconds(0.01f);
 
         while (true)
