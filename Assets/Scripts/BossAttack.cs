@@ -10,8 +10,8 @@ public class BossAttack : MonoBehaviour
 
     [Header("Attack Settings")]
     public float detectRange = 15f;     // 攻撃を始める距離
-    public float stopDistance = 7f;     // 追尾を止める距離
-    public float attackCooldown = 2f;
+    public float stopDistance = 10f;     // 追尾を止める距離
+    public float attackCooldown = 1.5f;
 
     private float attackTimer = 0f;
 
@@ -44,7 +44,6 @@ public class BossAttack : MonoBehaviour
         else if (distance <= stopDistance)
         {
             agent.isStopped = true;
-            animator.SetBool("Move", false);
 
             // プレイヤーの方へ向く（NavMeshAgent の回転を利用）
             Vector3 look = (player.position - transform.position);
