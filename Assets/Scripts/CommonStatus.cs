@@ -14,8 +14,8 @@ public class CommonStatus : MonoBehaviour
     [SerializeField] private int maxHp;//最大体力
     [SerializeField] public int attack;//攻撃力
     [SerializeField] private float moveSpeed;//移動速度
-    //パーティクル
     [SerializeField] private ParticleSystem hitParticle;//被弾パーティクル
+    [SerializeField]private AudioSource hitAudio;//被弾音
     [SerializeField] public float MoveSpeed { get { return moveSpeed; } }
     public bool IsMovable => StateEnum.Normal == state;//移動可能かどうか
 
@@ -59,7 +59,16 @@ public class CommonStatus : MonoBehaviour
         //{
         //    hitParticle.Play();
         //}
-        hitParticle.Play();
+        if (hitParticle != null)
+        {
+            hitParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            hitParticle.Play();
+        }
+        if (hitAudio != null)
+        {
+            hitAudio.Play();
+        }
+
         if (hp > 0) return;
         OnDie();
     }
