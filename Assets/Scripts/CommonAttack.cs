@@ -33,7 +33,6 @@ public class CommonAttack : MonoBehaviour
         //攻撃判定に触れたオブジェクトにダメージを与える
         var targetStatus = collider.GetComponent<CommonStatus>();
         if (null == targetStatus) return;
-        Debug.Log("Attack Hit!");
         targetStatus.Damage(status.attack);
 
     }

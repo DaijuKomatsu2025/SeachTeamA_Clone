@@ -22,7 +22,6 @@ public class BossBullet : MonoBehaviour
     {
         if ((other.gameObject.tag.Contains("Player")))
         {
-            Debug.Log("Player hit! Damage: " + damage);
             var status = other.gameObject.GetComponent<CommonStatus>();
             status.Damage((int)damage);
             Destroy(gameObject);
