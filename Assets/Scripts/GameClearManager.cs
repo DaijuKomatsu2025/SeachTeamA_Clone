@@ -20,22 +20,40 @@ public class GameClearManager : MonoBehaviour
     // 🏆 このStart()メソッドが「ゲームクリアシーンがロードされた瞬間」に自動で実行されます 🏆
     void Start()
     {
+        Time.timeScale = 1.0f;
+        // 1. BGMを再生
         // 1. BGMを再生
         if (bgmAudioSource != null)
         {
             bgmAudioSource.Play();
         }
+        // 非推奨の Physics.autoSimulation = false; を新しいAPIに置き換え
+        Physics.simulationMode = SimulationMode.Script;
+
+        // 🏆 初期化の大部分を次のフレームに遅延させる 🏆
+        StartCoroutine(InitializeNextFrame());
+    }
+
+    private IEnumerator InitializeNextFrame()
+    {
+        // 1フレーム待機して、Start()の初期化が完了するのを待つ
+        yield return null;
 
         // TextMeshProUGUI コンポーネントを取得
-        TMPro.TextMeshProUGUI tmpText = animator.GetComponent<TMPro.TextMeshProUGUI>();
-
-        // 2. アニメーションを起動
-        if (animator != null) // AnimatorコンポーネントがInspectorで設定されているか確認
+        TMPro.TextMeshProUGUI tmpText;
+        if (animator.TryGetComponent<TMPro.TextMeshProUGUI>(out tmpText))
         {
-            // Triggerを引くことで、待機状態(Idle)からGameClearアニメーションへ即座に遷移
+            // TMPの描画強制
+            tmpText.ForceMeshUpdate();
+        }
+
+        // アニメーションを起動
+        if (animator != null)
+        {
             animator.SetTrigger("GameClear");
         }
-        //// アニメーションの終了を待ってから終了処理を呼び出す
+
+        // アニメーション終了待ちコルーチンを開始
         StartCoroutine(WaitForAnimationEnd());
     }
 
