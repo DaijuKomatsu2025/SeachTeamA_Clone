@@ -14,6 +14,8 @@ public class CommonStatus : MonoBehaviour
     [SerializeField] private int maxHp;//最大体力
     [SerializeField] public int attack;//攻撃力
     [SerializeField] private float moveSpeed;//移動速度
+    //パーティクル
+    [SerializeField] private ParticleSystem hitParticle;//被弾パーティクル
     [SerializeField] public float MoveSpeed { get { return moveSpeed; } }
     public bool IsMovable => StateEnum.Normal == state;//移動可能かどうか
 
@@ -52,6 +54,12 @@ public class CommonStatus : MonoBehaviour
     {
         if (state == StateEnum.Dead) return;
         hp -= attack;
+        //被弾時にパーティクル再生条件ありVar
+        //if (this.gameObject.GetComponent<PlayerController>() == null)
+        //{
+        //    hitParticle.Play();
+        //}
+        hitParticle.Play();
         if (hp > 0) return;
         OnDie();
     }
