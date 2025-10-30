@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18a0b62e2de33f4ab70760132836c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
+  _spawnEffect: {fileID: 0}
+  _spawnSound: {fileID: 0}
   _enemyPrefabs:
   - {fileID: 4692092079593511437, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
   _collider: {fileID: 6354873781362202429}
@@ -68,5 +70,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 3, z: 5}
+  m_Size: {x: 7, y: 3, z: 7}
   m_Center: {x: 0, y: 2, z: 0}

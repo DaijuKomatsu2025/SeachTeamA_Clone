@@ -6,6 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Collider))]
 public class SpawnerAnnihilate : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _spawnEffect;
+    [SerializeField] private AudioClip _spawnSound;
     [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private Collider _collider;
     [SerializeField] private int _maxSpawnCount = 20;
@@ -37,7 +39,18 @@ public class SpawnerAnnihilate : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+
+        if (_spawnEffect != null)
+        {
+            var eff = Instantiate(_spawnEffect, this.transform.position, Quaternion.identity);
+            eff.Play();
+        }
+
+        if (_spawnSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_spawnSound, transform.position);
+        }
 
         while (true)
         {
@@ -50,7 +63,7 @@ public class SpawnerAnnihilate : MonoBehaviour
             }
             else if (_spawnCount == _maxSpawnCount)
             {
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(1f);
                 continue;
             }
             else
