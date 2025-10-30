@@ -90,7 +90,7 @@ public class PlayerController : CommonStatus
         }
         LastPostion = transform.position;//最後の位置を更新
 
-        if(state== StateEnum.Dead)
+        if (state == StateEnum.Dead)
         {
             characterController.enabled = false;//キャラクターコントローラーを無効化
 

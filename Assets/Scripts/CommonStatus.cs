@@ -15,7 +15,7 @@ public class CommonStatus : MonoBehaviour
     [SerializeField] public int attack;//UŒ‚—Í
     [SerializeField] private float moveSpeed;//ˆÚ“®‘¬“x
     [SerializeField] private ParticleSystem hitParticle;//”í’eƒp[ƒeƒBƒNƒ‹
-    [SerializeField]private AudioSource hitAudio;//”í’e‰¹
+    [SerializeField] private AudioSource hitAudio;//”í’e‰¹
     [SerializeField] public float MoveSpeed { get { return moveSpeed; } }
     public bool IsMovable => StateEnum.Normal == state;//ˆÚ“®‰Â”\‚©‚Ç‚¤‚©
 
