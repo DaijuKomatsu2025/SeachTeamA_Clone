@@ -10,7 +10,7 @@ public class BossAttack : MonoBehaviour
 
     [Header("Attack Settings")]
     public float detectRange = 15f;  // プレイヤーを感知する範囲
-    public float attackCooldown = 2f;
+    public float attackCooldown = 3f;
     public float rotateSpeed = 3f;   // 向きを変えるスピード
 
     private float attackTimer = 0f;
@@ -23,7 +23,12 @@ public class BossAttack : MonoBehaviour
             return;
 
         float distance = Vector3.Distance(transform.position, player.position);
-
+        //死んだら攻撃しない
+        var status = GetComponent<CommonStatus>();
+        if (status != null && !status.IsAlive)
+        {
+            return;
+        }
         // 一定距離内なら攻撃
         if (distance <= detectRange)
         {
@@ -32,13 +37,13 @@ public class BossAttack : MonoBehaviour
             targetDir.y = 0f; // 上下の角度を無視
             Quaternion targetRot = Quaternion.LookRotation(targetDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotateSpeed);
-            animator.SetTrigger("Attack");
+            
 
             // 🔹 攻撃タイマー
             attackTimer += Time.deltaTime;
             if (attackTimer >= attackCooldown)
             {
-                Shoot();
+                animator.SetTrigger("Attack");
                 attackTimer = 0f;
             }
         }
@@ -57,7 +62,6 @@ public class BossAttack : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(direction);
         
         Instantiate(bulletPrefab, firePoint.position, rot);
-        Debug.Log("💥 Boss fires at player!");
     }
 
     // シーン上で攻撃範囲を可視化
