@@ -432,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SecretWall
   _wall: {fileID: 975614666617142813}
   _hitEffect: {fileID: 2528056751196708763, guid: 61ea72329e30b2b4fa88edbcf62370b4, type: 3}
+  _hitSound: {fileID: 8300000, guid: 379761cf9a4ea4d4095557ec530b13c0, type: 3}
 --- !u!65 &411897379647927009
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5395,6 +5395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GetTreasure
   _gameclearCamera: {fileID: 754603714}
+  _getSound: {fileID: 8300000, guid: 2ef5b7654acaccf479eb93098852a301, type: 3}
 --- !u!1001 &1996462773
 PrefabInstance:
   m_ObjectHideFlags: 0
