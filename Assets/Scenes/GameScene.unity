@@ -403,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   tmpText: {fileID: 192830131}
   timeText: {fileID: 192830131}
-  totalTime: 600
+  totalTime: 330
   shakeMagnitude: 10
   shakeSpeed: 50
   shakeDuration: 0.5
