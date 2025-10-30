@@ -8,12 +8,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CommonStatus
 {
+    [SerializeField] private float waitForStopCamera = 3f;
+
     //[SerializeField]
     //private float MoveSpeed;//移動速度
     //[SerializeField]
     //private Animator animator;//アニメーターコンポーネント
     private CharacterController characterController;// キャラクターコントローラーコンポーネント
-    private Transform transform;// プレイヤーのTransformコンポーネント
+    private Transform _transform;// プレイヤーのTransformコンポーネント
     private Vector3 moveVelocity;//移動速度ベクトル
     private InputAction move;//移動入力アクション
     private InputAction _attack;//攻撃入力アクション
@@ -34,7 +36,7 @@ public class PlayerController : CommonStatus
     {
         base.Start();
         characterController = GetComponent<CharacterController>();
-        transform = GetComponent<Transform>();
+        _transform = GetComponent<Transform>();
         var inputActionAsset = GetComponent<PlayerInput>().actions;
         move = inputActionAsset.FindAction("Move");//移動アクションを取得
         _attack = inputActionAsset.FindAction("Attack");//攻撃アクションを取得
@@ -62,7 +64,7 @@ public class PlayerController : CommonStatus
             GotoAttackStateIfPossible();//攻撃状態に移行
         }
         //移動方向に向ける
-        transform.LookAt(transform.position + new Vector3(moveVelocity.x, 0, moveVelocity.z));
+        transform.LookAt(_transform.position + new Vector3(moveVelocity.x, 0, moveVelocity.z));
 
         //重力処理
         moveVelocity.y += Physics.gravity.y * Time.deltaTime;
@@ -75,17 +77,18 @@ public class PlayerController : CommonStatus
         {
             isStopping = true;
             StopTime += Time.deltaTime;
-            if (StopTime >= 3f)
+            if (StopTime >= waitForStopCamera)
             {
                 StopCamera.Priority = 10;//カメラの優先度を上げる
             }
-            else
-            {
-                StopCamera.Priority = 9;//カメラの優先度を元に戻す
-            }
+            //else
+            //{
+            //    StopCamera.Priority = 9;//カメラの優先度を元に戻す
+            //}
         }
         else//移動している場合
         {
+            if(isStopping) StopCamera.Priority = 9;//カメラの優先度を元に戻す
             isStopping = false;
             StopTime = 0;
         }
