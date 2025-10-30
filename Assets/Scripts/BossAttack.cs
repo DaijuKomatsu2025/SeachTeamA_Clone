@@ -62,7 +62,6 @@ public class BossAttack : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(direction);
         
         Instantiate(bulletPrefab, firePoint.position, rot);
-        Debug.Log("💥 Boss fires at player!");
     }
 
     // シーン上で攻撃範囲を可視化
