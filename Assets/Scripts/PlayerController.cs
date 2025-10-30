@@ -30,8 +30,9 @@ public class PlayerController : CommonStatus
     private MessageUIController _messageController;// メッセージUIコントローラーへの参照
 
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         characterController = GetComponent<CharacterController>();
         transform = GetComponent<Transform>();
         var inputActionAsset = GetComponent<PlayerInput>().actions;
@@ -90,7 +91,7 @@ public class PlayerController : CommonStatus
         }
         LastPostion = transform.position;//最後の位置を更新
 
-        if(state== StateEnum.Dead)
+        if (state == StateEnum.Dead)
         {
             characterController.enabled = false;//キャラクターコントローラーを無効化
 

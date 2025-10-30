@@ -5,7 +5,7 @@ using System.Collections;
 
 public class EnemyStatus : CommonStatus
 {
-
+    [SerializeField] private AudioSource dieAudio;//死亡音
     private NavMeshAgent agent;
     protected override void Start()
     {
@@ -29,6 +29,10 @@ public class EnemyStatus : CommonStatus
     {
         OnEnemyDie?.Invoke(this);
         base.OnDie();
+        if (dieAudio != null)
+        {
+            dieAudio.Play();
+        }
         //死んだらコライダーを無効化
         var collider = GetComponent<Collider>();
         if (collider != null)

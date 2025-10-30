@@ -20,9 +20,9 @@ public class CommonAttack : MonoBehaviour
     }
     public void OnAttackRangeEnter(Collider other)
     {
-        if (!status.IsAlive) return; 
+        if (!status.IsAlive) return;
         StartCoroutine(AttackDelay(1.5f));
-       
+
     }
     public void OnAttackStart()
     {
@@ -47,7 +47,7 @@ public class CommonAttack : MonoBehaviour
         yield return new WaitForSeconds(attackInterval);
         status.ReturnToNormalState();
     }
-    private IEnumerator AttackDelay(float delay) 
+    private IEnumerator AttackDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         AttackIfPossible();
