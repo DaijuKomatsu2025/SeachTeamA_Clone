@@ -1,45 +1,57 @@
 ﻿using UnityEngine;
-
+using UnityEngine.AI;
 
 public class BossAttack : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;         // プレイヤー
-    public Transform firePoint;      // 発射位置（口）
-    public GameObject bulletPrefab;  // 弾のPrefab
+    public Transform player;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
     [Header("Attack Settings")]
-    public float detectRange = 15f;  // プレイヤーを感知する範囲
-    public float attackCooldown = 3f;
-    public float rotateSpeed = 3f;   // 向きを変えるスピード
+    public float detectRange = 15f;     // 攻撃を始める距離
+    public float stopDistance = 7f;     // 追尾を止める距離
+    public float attackCooldown = 2f;
 
     private float attackTimer = 0f;
 
-    [SerializeField] private Animator animator;
+    private NavMeshAgent agent;
+    private Animator animator;
+    private CommonStatus status;
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        status = GetComponent<CommonStatus>();
+    }
 
     void Update()
     {
-        if (player == null || firePoint == null || bulletPrefab == null)
+        if (player == null || status == null || !status.IsAlive)
             return;
 
         float distance = Vector3.Distance(transform.position, player.position);
-        //死んだら攻撃しない
-        var status = GetComponent<CommonStatus>();
-        if (status != null && !status.IsAlive)
-        {
-            return;
-        }
-        // 一定距離内なら攻撃
-        if (distance <= detectRange)
-        {
-            // 🔹 プレイヤーの方向を向く（Y軸だけ回転）
-            Vector3 targetDir = (player.position - transform.position);
-            targetDir.y = 0f; // 上下の角度を無視
-            Quaternion targetRot = Quaternion.LookRotation(targetDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotateSpeed);
-            
 
-            // 🔹 攻撃タイマー
+        // プレイヤーが攻撃範囲外 → 追いかける
+        if (distance > stopDistance && distance <= detectRange)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            animator.SetBool("Move", true);
+        }
+        // 一定範囲内 → 停止して攻撃
+        else if (distance <= stopDistance)
+        {
+            agent.isStopped = true;
+            animator.SetBool("Move", false);
+
+            // プレイヤーの方へ向く（NavMeshAgent の回転を利用）
+            Vector3 look = (player.position - transform.position);
+            look.y = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), 5f * Time.deltaTime);
+
+            // 攻撃クールタイム
             attackTimer += Time.deltaTime;
             if (attackTimer >= attackCooldown)
             {
@@ -47,27 +59,24 @@ public class BossAttack : MonoBehaviour
                 attackTimer = 0f;
             }
         }
-        else
-        {
-            // 範囲外では攻撃タイマーをリセット
-            attackTimer = 0f;
-        }
-
     }
 
+    // アニメーションイベントから呼ぶ
     void Shoot()
     {
-        // プレイヤー方向を基準に弾を生成
-        Vector3 direction = (player.position - firePoint.position).normalized;
-        Quaternion rot = Quaternion.LookRotation(direction);
-        
+        Vector3 dir = (player.position - firePoint.position).normalized;
+        Quaternion rot = Quaternion.LookRotation(dir);
+
         Instantiate(bulletPrefab, firePoint.position, rot);
     }
 
-    // シーン上で攻撃範囲を可視化
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stopDistance);
     }
 }
+
