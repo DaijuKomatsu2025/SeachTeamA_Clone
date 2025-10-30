@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 681891178608042715}
   - component: {fileID: -1447831082801315177}
   - component: {fileID: 327082570593655135}
+  - component: {fileID: 495339101977614421}
   m_Layer: 7
   m_Name: MainBoss
   m_TagString: Untagged
@@ -192,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3007254662763254846}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.36, y: 0, z: 0.093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -512,6 +513,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &495339101977614421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007254662763254846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0dd11d62b703e4bb06e10ff444ce5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDropper
+  dropRate: 1
+  itemPrefab: {fileID: -8822245291593930470, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
+  number: 1
 --- !u!1 &3407180312338076225
 GameObject:
   m_ObjectHideFlags: 0
