@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67.4
+      value: -67.52
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -57.9
+      value: -53.81
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 670185268403769248, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -91.5
+      value: -88.94
       objectReference: {fileID: 0}
     - target: {fileID: 670185268403769248, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -546,7 +546,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 670185268403769248, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.5
+      value: -18.65
       objectReference: {fileID: 0}
     - target: {fileID: 670185268403769248, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 670185268403769248, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -73.8
+      value: -73.74
       objectReference: {fileID: 0}
     - target: {fileID: 670185268403769248, guid: 3843f1852ff5f774c90bb0878c7c1f3f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1352,6 +1352,10 @@ PrefabInstance:
       propertyPath: StopCamera
       value: 
       objectReference: {fileID: 1049146098}
+    - target: {fileID: 6366672497113411311, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
+      propertyPath: waitForStopCamera
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6839390780294441217, guid: 199ec9253d1071140b86d494d8df9562, type: 3}
       propertyPath: m_Name
       value: MainCharactor
@@ -3580,7 +3584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.3
+      value: -22.55
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3588,7 +3592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -66.4
+      value: -65.99
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3716,7 +3720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3724,7 +3728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.04
+      value: -71
       objectReference: {fileID: 0}
     - target: {fileID: 9130622350208868107, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4795,6 +4799,7 @@ MonoBehaviour:
     sfxClip: {fileID: 0}
     animator: {fileID: 1798396678}
     animationTrigger: Trigger_Bounce
+  _restartUIPanel: {fileID: 0}
 --- !u!95 &1798396678
 Animator:
   serializedVersion: 7

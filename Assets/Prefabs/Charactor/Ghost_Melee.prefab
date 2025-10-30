@@ -298,8 +298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e498f05941ce044a910fdfdc9ffb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
-  hp: 10
-  maxHp: 10
+  hp: 30
+  maxHp: 30
   attack: 3
   moveSpeed: 2
   hitParticle: {fileID: 5285259745384803963}
