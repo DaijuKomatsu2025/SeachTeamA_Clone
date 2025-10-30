@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 327082570593655135}
   - component: {fileID: 495339101977614421}
   m_Layer: 7
-  m_Name: MainBoss
+  m_Name: Ghost_Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

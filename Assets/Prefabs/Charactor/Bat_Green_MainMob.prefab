@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0dd11d62b703e4bb06e10ff444ce5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemDropper
-  dropRate: 0.3
+  dropRate: 0.05
   itemPrefab: {fileID: -2664825617654701805, guid: 67493dedce4dcee4b8851526e7b0448f, type: 3}
   number: 1
 --- !u!1 &4868776938150224178
