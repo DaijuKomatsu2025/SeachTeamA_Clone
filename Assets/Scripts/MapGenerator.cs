@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    private const float playerOffsetY = 1.5f;
+    private const float mapOffset = 7.5f;
     [SerializeField] private GameObject[] _mapParts;
     [SerializeField] private GameObject _floorPrefab;
     [SerializeField] private GameObject _spawnNormal;
@@ -135,7 +137,7 @@ public class MapGenerator : MonoBehaviour
                 if (cells[y] == "00") { } // 何もしない
                 else if (cells[y] == "SS")
                 {
-                    _newPosition = new Vector3(-x * 7.5f, 0, -y * 7.5f - 1.5f);
+                    _newPosition = new Vector3(-x * mapOffset, 0, -y * mapOffset - playerOffsetY);
                     var hint = Instantiate(_hintObjects[0], pos, Quaternion.identity, _parent);
                     hint.GetComponent<HintMessage>().SetCurrentMessage(0, _messageWindow);
                 }
