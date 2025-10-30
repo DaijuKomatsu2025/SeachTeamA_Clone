@@ -7,7 +7,7 @@ public class HintMessage : MonoBehaviour
     [SerializeField] private MessageWindow messageWindow;
     private string[] _hintTexts;
 
-    private string _path = @"Assets\StreamingAssets\hints.csv";
+    private string _path = Path.Combine(Application.streamingAssetsPath, "hints.csv");
 
     [SerializeField] private string _currentMsg = "未設定";
 

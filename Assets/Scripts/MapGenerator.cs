@@ -24,8 +24,8 @@ public class MapGenerator : MonoBehaviour
     private Vector3 _newPosition;
     private string[] _readLines = default!;
     private string[] _readEventLines = default!;
-    private string _path = @"Assets\StreamingAssets\map01.csv";
-    private string _eventPath = @"Assets\StreamingAssets\eventMap01.csv";
+    private string _path = Path.Combine(Application.streamingAssetsPath, "map01.csv");
+    private string _eventPath = Path.Combine(Application.streamingAssetsPath, "eventMap01.csv");
 
     private int _mapWidth = 10;
     private int _mapHeight = 10;
