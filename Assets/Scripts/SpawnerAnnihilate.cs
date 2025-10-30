@@ -29,9 +29,9 @@ public class SpawnerAnnihilate : MonoBehaviour
     public void SetUiController(TargetCountUIController uiController)
     {
         this._uiController = uiController;
-        if (this._uiController != null)
+        if (this._uiController == null)
         {
-            Debug.Log("uiController attached");
+            Debug.Log("uiController is null");
         }
     }
 
@@ -41,7 +41,7 @@ public class SpawnerAnnihilate : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("swawnCount:" + _spawnCount); 
+            //Debug.Log("swawnCount:" + _spawnCount); 
 
             if(_isSpawning && SpawnedEnemies.Count == 0)
             {
@@ -70,9 +70,12 @@ public class SpawnerAnnihilate : MonoBehaviour
                     var enemy = Instantiate(_enemyPrefabs[enemyPrefabIndex], hit.position, rotation);
                     enemy.gameObject.name = _enemyPrefabs[enemyPrefabIndex].name + "_" + _spawnCount.ToString("00");
                     var enemyStatus = enemy.GetComponent<EnemyStatus>();
-                    enemyStatus.gameObject.GetComponent<EnemyFollow_Bat>().player = _target;
 
-                    enemyStatus.EnewmyDieEvent.AddListener(OnEnemyDefeated);
+                    if (enemyStatus != null)
+                    {
+                        enemyStatus.gameObject.GetComponent<EnemyFollow_Bat>().player = _target;
+                        enemyStatus.EnewmyDieEvent.AddListener(OnEnemyDefeated);
+                    }
 
                     SpawnedEnemies.Add(enemyStatus);
                     _spawnCount++;
@@ -99,8 +102,6 @@ public class SpawnerAnnihilate : MonoBehaviour
             {
                 _messageController.ShowMessage(MessageUIController.MessageType.EnterMonsterHouse);// 敵を全部倒せ！メッセージを表示
             }
-
-
         }
     }
 

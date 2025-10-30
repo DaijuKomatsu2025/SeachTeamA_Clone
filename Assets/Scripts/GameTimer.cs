@@ -223,11 +223,11 @@ public class Timer : MonoBehaviour
         }
     }
     //残り時間を増やすタイムリカバリーメソッド(プロパティの方にpublicで初期値30fにしてます)
-    public void RecoverTimes()
+    public void RecoverTimes(float extendTime)
     {
         if (timeText != null)
         {
-            totalTime += recoverTime;
+            totalTime += extendTime;
         }
     }
 

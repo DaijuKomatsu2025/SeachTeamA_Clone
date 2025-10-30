@@ -108,17 +108,16 @@ public class MapGenerator : MonoBehaviour
 
         InitEvent();
 
+        var scale = Vector3.one * 0.75f;
+        scale.y /= 3.0f;
+        _parent.transform.localScale = scale;
+        _parent.transform.position = _newPosition;
+
         // すべてのSurfaceを一括ベイク
         foreach (var surface in _allSurfaces)
         {
             surface.BuildNavMesh();
         }
-
-        var scale = Vector3.one * 0.75f;
-        scale.y /= 3.0f;
-        _parent.transform.localScale = scale;
-
-        _parent.transform.position = _newPosition;
 
         yield return null;
     }
@@ -136,8 +135,8 @@ public class MapGenerator : MonoBehaviour
                 if (cells[y] == "00") { } // 何もしない
                 else if (cells[y] == "SS")
                 {
-                    _newPosition = new Vector3(-x * 7.5f, 0, -y * 7.5f);
-                    var hint = Instantiate(_hintObjects[2], pos, Quaternion.identity, _parent);
+                    _newPosition = new Vector3(-x * 7.5f, 0, -y * 7.5f - 1.5f);
+                    var hint = Instantiate(_hintObjects[0], pos, Quaternion.identity, _parent);
                     hint.GetComponent<HintMessage>().SetCurrentMessage(0, _messageWindow);
                 }
                 else if (cells[y] == "N0")
@@ -158,25 +157,25 @@ public class MapGenerator : MonoBehaviour
                 {
                     var hint = Instantiate(_hintObjects[0], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code - 1, _messageWindow);
                 }
                 else if (cells[y].StartsWith("D"))
                 {
                     var hint = Instantiate(_hintObjects[1], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code - 1, _messageWindow);
                 }
                 else if (cells[y].StartsWith("L"))
                 {
                     var hint = Instantiate(_hintObjects[2], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code - 1, _messageWindow);
                 }
                 else if (cells[y].StartsWith("R"))
                 {
                     var hint = Instantiate(_hintObjects[3], pos, Quaternion.identity, _parent);
                     int.TryParse(cells[y].Substring(1, 1), out int code);
-                    hint.GetComponent<HintMessage>().SetCurrentMessage(code, _messageWindow);
+                    hint.GetComponent<HintMessage>().SetCurrentMessage(code - 1, _messageWindow);
                 }
                 else if (cells[y].StartsWith("B"))
                 {
