@@ -11,7 +11,7 @@ public class GetTreasure : MonoBehaviour
     {
         if (other.gameObject.tag.Contains("Player"))
         {
-            Debug.Log("お宝ゲット！！！！！！");
+            //Debug.Log("お宝ゲット！！！！！！");
             _gameclearCamera.Priority.Value = 20;
             StartCoroutine(GameClear());
         }
@@ -19,7 +19,7 @@ public class GetTreasure : MonoBehaviour
 
     IEnumerator GameClear()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("GameClearScene");
     }
 }   

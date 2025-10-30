@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class BossBullet : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class BossBullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, lifeTime); // éûä‘Ç≈é©ìÆè¡ñ≈
+        Destroy(gameObject, lifeTime); // ÊôÇÈñì„ÅßËá™ÂãïÊ∂àÊªÖ
     }
 
     void Update()
@@ -26,9 +26,12 @@ public class BossBullet : MonoBehaviour
             status.Damage((int)damage);
             Destroy(gameObject);
         }
-        else
+        else if (other.gameObject.name != "SpawnerNormal2" || other.gameObject.name != "SpawnerNormal2 (1)" ||
+            other.gameObject.name != "SpawnerNormal2 (2)" || other.gameObject.name != "SpawnerNormal2 (3)")
         {
             Destroy(gameObject);
         }
+
+        Debug.Log("BulletHit: " + other.gameObject.name);
     }
 }

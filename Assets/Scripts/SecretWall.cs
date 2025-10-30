@@ -10,7 +10,7 @@ public class SecretWall : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerAttack"))
         {
             _num++;
-            Debug.Log("hit:" + _num);
+            //Debug.Log("hit:" + _num);
             if (_num >= 3) _wall.SetActive(false);
         }
     }

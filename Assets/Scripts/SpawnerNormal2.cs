@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider))]
-public class SpawnerNormal : MonoBehaviour
+public class SpawnerNormal2 : MonoBehaviour
 {
     private const int _spawnRadius = 1;
     private const float MaxDistance = 2f;
@@ -52,7 +52,7 @@ public class SpawnerNormal : MonoBehaviour
                     var enemyStatus = enemy.GetComponent<EnemyStatus>();
                     if (enemyStatus != null)
                     {
-                        enemyStatus.gameObject.GetComponent<EnemyFollow_Bat>().player = _target;
+                        enemyStatus.gameObject.GetComponent<BossAttack>().player = _target;
 
                         enemyStatus.EnewmyDieEvent.AddListener(OnEnemyDefeated);
                         SpawnedEnemies.Add(enemyStatus);

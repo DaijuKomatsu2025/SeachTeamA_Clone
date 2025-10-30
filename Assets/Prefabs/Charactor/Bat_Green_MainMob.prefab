@@ -935,7 +935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
   hp: 1
   maxHp: 1
-  attack: 0
+  attack: 1
   moveSpeed: 2
   hitParticle: {fileID: 2834059146386845670}
   hitAudio: {fileID: -6809462526716782736}
