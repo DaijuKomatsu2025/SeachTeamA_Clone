@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GetPotion
   _healPoint: 10
   _getSound: {fileID: 8300000, guid: 123f310b1d4a5a14f946884056716574, type: 3}
+  _getEffect: {fileID: 5515374687929910212, guid: 20cdd3063a2c11841b50b0650c59ebfa, type: 3}
 --- !u!114 &-2664825617654701805
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public class ExtendTimer : MonoBehaviour
     [SerializeField] private float _extendTime = 30f;
     [SerializeField] private Timer _timer;
     [SerializeField] private AudioClip _getSound;
+    [SerializeField] private ParticleSystem _getEffect;
 
     private void Start()
     {
@@ -18,6 +19,12 @@ public class ExtendTimer : MonoBehaviour
     {
         if ((other.gameObject.tag.Contains("Player")))
         {
+            if (_getEffect != null)
+            {
+                var effect = Instantiate(_getEffect, this.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                effect.Play();
+            }
+
             if (_getSound != null)
             {
                 AudioSource.PlayClipAtPoint(_getSound, transform.position);

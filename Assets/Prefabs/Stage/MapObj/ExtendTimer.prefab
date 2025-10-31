@@ -71,6 +71,7 @@ MonoBehaviour:
   _extendTime: 30
   _timer: {fileID: 0}
   _getSound: {fileID: 8300000, guid: 6dc7a8f0d15bd2f4ea97121a094b7f72, type: 3}
+  _getEffect: {fileID: 6392752401876073876, guid: 89fe6e39533b0de438b7f5c9c89de008, type: 3}
 --- !u!114 &-8822245291593930470
 MonoBehaviour:
   m_ObjectHideFlags: 0

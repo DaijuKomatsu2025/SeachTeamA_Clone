@@ -23,7 +23,7 @@ public class SecretWall : MonoBehaviour
 
             if (_hitEffect != null)
             {
-                var effect = Instantiate(_hitEffect, pos, Quaternion.identity);
+                var effect = Instantiate(_hitEffect, pos, Quaternion.Euler(-90f, 0f, 0f));
                 effect.Play();
             }
 
