@@ -16,6 +16,7 @@ public class MenuSelector : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1; // メニューシーンに入るときに時間を正常化
         var inputActionAsset = GetComponent<PlayerInput>().actions;
         _navigate = inputActionAsset.FindAction("Navigate");
         _submit = inputActionAsset.FindAction("Submit");
@@ -75,8 +76,14 @@ public class MenuSelector : MonoBehaviour
 
     void OnSubmit(InputAction.CallbackContext context)
     {
-        //Debug.Log("OnSubmit called");
+        if (!canReceiveInput) return;
+
+        Debug.Log("OnSubmit called");
         buttons[selectedIndex].onClick.Invoke();
+
+        // 入力受付を一時停止
+        canReceiveInput = false;
+        Invoke(nameof(ResetInput), inputCooldownTime);
     }
 
     void UpdateSelection()

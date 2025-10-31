@@ -1,10 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections;//コルーチン用
 using TMPro;
-using System.Collections;//コルーチン用
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;//テキストメッシュプロを使う場合
 public class Timer : MonoBehaviour
 {
+    [SerializeField] private float cautionTime = 120f;
+    [SerializeField] private float dangerTime = 60f;
+
     // UIの場合 (Canvas上にあるTextMesh Pro)
     public TextMeshProUGUI tmpText;
 
@@ -115,21 +118,21 @@ public class Timer : MonoBehaviour
 
         // 5. ゲームの次のアクション（例：ゲームオーバー画面の表示）
         Debug.Log("タイムアップ！ゲームを停止します。");
+        SceneManager.LoadScene("GameOverScene");
         // Time.timeScale = 0f; // ゲーム全体をポーズさせたい場合
     }
 
     private void CountDownTimerColor(float totalTime)//時間経過でタイマーの色を変更するメソッド
     {
-        //残り時間が5分を切るとテキストの色を黄色にする
-        if (totalTime <= 300f)
+        //残り時間が2分を切るとテキストの色を黄色にする
+        if (totalTime <= cautionTime)
         {
             tmpText.color =Color.orange;
         }
         //残り時間が1分を切るとテキストの色を赤色にする
-        if (totalTime <= 60f) 
+        else if (totalTime <= dangerTime) 
         {
             tmpText.color = Color.red;
-           
         }
     }
 

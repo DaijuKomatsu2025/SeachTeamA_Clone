@@ -2,17 +2,19 @@
 
 public class GameModeManager : MonoBehaviour
 {
-    public static GameModeManager instance;
+    public static GameModeManager Instance;
 
     void Awake()
     {
-        if (instance is null)
+        if (Instance != null && Instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
+            return;
         }
-        else Destroy(gameObject);
+
+        Instance = this;
     }
+
     public enum GameMode
     {
         Title,

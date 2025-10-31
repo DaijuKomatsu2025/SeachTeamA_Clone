@@ -1,7 +1,4 @@
-﻿using UnityEditor;
-using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 

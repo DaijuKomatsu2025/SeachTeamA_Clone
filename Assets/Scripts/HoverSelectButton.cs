@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class HoverSelectButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler

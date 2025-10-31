@@ -3,25 +3,23 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static SoundManager Instance;
 
     int maxSoundsCount = 10;
     int currentSoundCount = 0;
 
     void Awake()
     {
-        if (instance is null) 
-        { 
-            instance = this; 
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
     }
 
-     public void PlaySound(AudioClip clip, Vector3 position)
+    public void PlaySound(AudioClip clip, Vector3 position)
     {
         if (currentSoundCount >= maxSoundsCount) return;
 
