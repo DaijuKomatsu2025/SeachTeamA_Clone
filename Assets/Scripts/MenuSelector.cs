@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class MenuSelector : MonoBehaviour
 {
+    [SerializeField] private AudioClip navigateSound; // ナビゲーション音
+    [SerializeField] private AudioClip desideSound; // 決定音
+
     [SerializeField] private GameObject selectorImage; // 選択インジケーターのイメージ
     public Button[] buttons; // インスペクターで2つのボタンを割り当て
     private int selectedIndex = 0;
@@ -13,6 +16,8 @@ public class MenuSelector : MonoBehaviour
 
     private InputAction _navigate;
     private InputAction _submit;
+
+    private bool isDesided = false;
 
     void Awake()
     {
@@ -35,6 +40,7 @@ public class MenuSelector : MonoBehaviour
 
     void Start()
     {
+        isDesided = false;
         UpdateSelection();
     }
 
@@ -62,6 +68,11 @@ public class MenuSelector : MonoBehaviour
         selectedIndex = 1 - selectedIndex;
         UpdateSelection();
 
+        if (navigateSound != null)
+        {
+            AudioSource.PlayClipAtPoint(navigateSound, Camera.main.transform.position);
+        }
+
         // 入力受付を一時停止
         canReceiveInput = false;
         Invoke(nameof(ResetInput), inputCooldownTime);
@@ -76,18 +87,28 @@ public class MenuSelector : MonoBehaviour
 
     void OnSubmit(InputAction.CallbackContext context)
     {
-        if (!canReceiveInput) return;
+        if (isDesided) { Debug.Log("Submit ignored: already decided"); return; }
+        if (!canReceiveInput) { Debug.Log("Submit ignored: cooldown"); return; }
 
-        Debug.Log("OnSubmit called");
+        Debug.Log("Submit accepted");
+
+        if (desideSound != null && Camera.main != null)
+        {
+            AudioSource.PlayClipAtPoint(desideSound, Camera.main.transform.position);
+        }
+
+        Debug.Log("Invoking button click");
         buttons[selectedIndex].onClick.Invoke();
+        Debug.Log("Button click invoked");
 
-        // 入力受付を一時停止
+        isDesided = true;
         canReceiveInput = false;
         Invoke(nameof(ResetInput), inputCooldownTime);
     }
 
     void UpdateSelection()
     {
+        isDesided = false;
         var pos = buttons[selectedIndex].transform.position;
         selectorImage.transform.position = pos;
         buttons[selectedIndex].Select(); // UI上で選択状態にする

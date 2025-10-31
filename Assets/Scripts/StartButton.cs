@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -9,7 +8,8 @@ public class StartButton : MonoBehaviour
 
     public void OnButtonclick()
     {
-        SceneManager.LoadScene("GameScene");
+        startButton.interactable = false;
+        SceneReloader.Instance.loadGameScene("GameScene");
     }
 
     private void OnDisable()
