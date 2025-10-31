@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -99,12 +100,6 @@ public class MapGenerator : MonoBehaviour
                     {
                         var parts = Instantiate(_mapParts[num], pos, Quaternion.identity, _parent);
                     }
-
-                    var floor = Instantiate(_floorPrefab, pos, Quaternion.identity, _parent);
-
-                    // NavMeshSurfaceを収集
-                    var surface = floor.GetComponent<NavMeshSurface>();
-                    if (surface != null) _allSurfaces.Add(surface);
                 }
                 else
                 {
@@ -112,6 +107,12 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+
+        var floor = Instantiate(_floorPrefab, new Vector3(60,0,60), Quaternion.identity, _parent);
+
+        // NavMeshSurfaceを収集
+        var surface = floor.GetComponent<NavMeshSurface>();
+        //if (surface != null) _allSurfaces.Add(surface);
 
         InitEvent();
 
@@ -121,10 +122,7 @@ public class MapGenerator : MonoBehaviour
         _parent.transform.position = _newPosition;
 
         // すべてのSurfaceを一括ベイク
-        foreach (var surface in _allSurfaces)
-        {
-            surface.BuildNavMesh();
-        }
+        surface.BuildNavMesh();
 
         yield return null;
     }

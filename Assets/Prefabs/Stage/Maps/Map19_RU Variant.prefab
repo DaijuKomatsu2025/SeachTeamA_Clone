@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4072931639435639814, guid: f6099f5e3f1664a4b80aa257e6c51b2c, type: 3}
       propertyPath: m_Name
-      value: Map18_LU Variant
+      value: Map19_RU Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5384420926484565091, guid: f6099f5e3f1664a4b80aa257e6c51b2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,6 +55,10 @@ PrefabInstance:
     - target: {fileID: 5384420926484565091, guid: f6099f5e3f1664a4b80aa257e6c51b2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797041705283529638, guid: f6099f5e3f1664a4b80aa257e6c51b2c, type: 3}
+      propertyPath: m_Carve
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
