@@ -22,7 +22,6 @@ public class Timer : MonoBehaviour
     public float shakeSpeed = 50f;
     // シェシェイクの継続時間
     public float shakeDuration = 0.5f;
-
     private bool isShaking = false;//シェイク中かどうかのフラグ
     private bool isOneMinutePassed = false;//1分を切ったかどうかのフラグ
     private Vector3 originalPosition; // テキストの初期位置
@@ -68,7 +67,7 @@ public class Timer : MonoBehaviour
     {
         if (_isTimerRunning && totalTime > 0f)
         {
-          
+
 
             // 時間を更新して表示するメソッドを呼び出します
             UpdateTimeDisplay(totalTime);
@@ -109,7 +108,7 @@ public class Timer : MonoBehaviour
 
         if (_messageController != null)//メッセージUIコントローラーが存在する場合
         {
-            _messageController.ShowMessage(MessageUIController.MessageType.TimeUp);//時間切れメッセージを表示
+            _messageController.ShowGameOverUI(MessageUIController.MessageType.TimeUp);//時間切れメッセージを表示
         }
 
 
@@ -123,13 +122,13 @@ public class Timer : MonoBehaviour
         //残り時間が5分を切るとテキストの色を黄色にする
         if (totalTime <= 300f)
         {
-            tmpText.color =Color.orange;
+            tmpText.color = Color.orange;
         }
         //残り時間が1分を切るとテキストの色を赤色にする
-        if (totalTime <= 60f) 
+        if (totalTime <= 60f)
         {
             tmpText.color = Color.red;
-           
+
         }
     }
 
