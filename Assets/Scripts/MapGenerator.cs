@@ -45,6 +45,11 @@ public class MapGenerator : MonoBehaviour
         StartCoroutine(InitMap());
     }
 
+    private void Start()
+    {
+        GameModeManager.SetGameMode(GameModeManager.GameMode.Explore);
+    }
+
     private void ReadData()
     {
         try
