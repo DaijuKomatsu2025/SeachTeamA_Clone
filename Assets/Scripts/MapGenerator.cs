@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class MapGenerator : MonoBehaviour
 {

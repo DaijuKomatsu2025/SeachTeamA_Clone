@@ -21,7 +21,8 @@ public class ExtendTimer : MonoBehaviour
         {
             if (_getEffect != null)
             {
-                var effect = Instantiate(_getEffect, this.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                var effect = Instantiate(_getEffect, other.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                effect.transform.SetParent(other.transform);
                 effect.Play();
             }
 
