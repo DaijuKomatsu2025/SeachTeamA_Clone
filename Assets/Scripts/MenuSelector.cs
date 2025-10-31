@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MenuSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject selectorImage; // ‘I‘ğƒCƒ“ƒWƒP[ƒ^[‚ÌƒCƒ[ƒW
-    public Button[] buttons; // ƒCƒ“ƒXƒyƒNƒ^[‚Å2‚Â‚Ìƒ{ƒ^ƒ“‚ğŠ„‚è“–‚Ä
+    [SerializeField] private GameObject selectorImage; // é¸æŠã‚¤ãƒ³ã‚¸ã‚±ãƒ¼ã‚¿ãƒ¼ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
+    public Button[] buttons; // ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã§2ã¤ã®ãƒœã‚¿ãƒ³ã‚’å‰²ã‚Šå½“ã¦
     private int selectedIndex = 0;
 
-    public float inputCooldownTime = 0.5f; // ƒN[ƒ‹ƒ_ƒEƒ“ŠÔi•bj
+    public float inputCooldownTime = 0.5f; // ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³æ™‚é–“ï¼ˆç§’ï¼‰
     private bool canReceiveInput = true;
 
     private InputAction _navigate;
@@ -56,12 +56,12 @@ public class MenuSelector : MonoBehaviour
         if (!canReceiveInput) return;
 
         Vector2 input = context.ReadValue<Vector2>();
-        if (input.y == 0) return; // ã‰º“ü—ÍˆÈŠO‚Í–³‹
+        if (input.y == 0) return; // ä¸Šä¸‹å…¥åŠ›ä»¥å¤–ã¯ç„¡è¦–
 
         selectedIndex = 1 - selectedIndex;
         UpdateSelection();
 
-        // “ü—Íó•t‚ğˆê’â~
+        // å…¥åŠ›å—ä»˜ã‚’ä¸€æ™‚åœæ­¢
         canReceiveInput = false;
         Invoke(nameof(ResetInput), inputCooldownTime);
 
@@ -83,7 +83,7 @@ public class MenuSelector : MonoBehaviour
     {
         var pos = buttons[selectedIndex].transform.position;
         selectorImage.transform.position = pos;
-        buttons[selectedIndex].Select(); // UIã‚Å‘I‘ğó‘Ô‚É‚·‚é
+        buttons[selectedIndex].Select(); // UIä¸Šã§é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
     }
 
     public void SelectStartButton()

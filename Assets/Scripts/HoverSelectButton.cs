@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -9,13 +9,13 @@ public class HoverSelectButton : MonoBehaviour, IPointerEnterHandler, ISelectHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // ‚±‚Ìƒ{ƒ^ƒ“‚ğ‘I‘ğó‘Ô‚É‚·‚é
+        // ã“ã®ãƒœã‚¿ãƒ³ã‚’é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
         EventSystem.current.SetSelectedGameObject(gameObject);
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        //Debug.Log($"{gameObject.name} ‚ª‘I‘ğ‚³‚ê‚Ü‚µ‚½");
+        //Debug.Log($"{gameObject.name} ãŒé¸æŠã•ã‚Œã¾ã—ãŸ");
         onSelected?.Invoke();
     }
 
