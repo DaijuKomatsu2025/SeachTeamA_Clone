@@ -108,11 +108,10 @@ public class PlayerController : CommonStatus
                 _timer.StopAndResetTimer(true);
             }
 
-
             if (_messageController != null)//メッセージUIコントローラーを確認して全滅メッセージを入れる
             {
                 // MessageType.PlayerDefeated を指定して呼び出す
-                _messageController.ShowMessage(MessageUIController.MessageType.PlayerDefeated);
+                _messageController.ShowGameOverUI(MessageUIController.MessageType.PlayerDefeated);
 
                 //// UIコントローラーに「ゲームオーバー状態である」ことを通知
                 ////    これにより、UI側がアニメーション終了後にボタンを表示する準備が整う
