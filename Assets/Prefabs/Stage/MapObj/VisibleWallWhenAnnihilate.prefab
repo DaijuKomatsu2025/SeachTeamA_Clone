@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VisibleWallWhenNear
   _wall: {fileID: 4224728439233548616}
+  _appearSound: {fileID: 8300000, guid: 4c0ac19b80aab50419bf4fc60baa7ffa, type: 3}
 --- !u!1 &4224728439233548616
 GameObject:
   m_ObjectHideFlags: 0

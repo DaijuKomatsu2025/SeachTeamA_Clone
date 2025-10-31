@@ -25,6 +25,6 @@ public class GetTreasure : MonoBehaviour
     IEnumerator GameClear()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("GameClearScene");
+        SceneReloader.Instance.loadGameScene("GameClearScene");
     }
 }   

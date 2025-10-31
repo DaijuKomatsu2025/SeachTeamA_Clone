@@ -12,6 +12,8 @@ public class SpawnerNormal : MonoBehaviour
     [SerializeField] private Collider _collider;
     [SerializeField] private float _spawnDuration = 1.0f;
     [SerializeField] private int _maxSpawnCount = 20;
+    [SerializeField] private ParticleSystem _spawnEffect;
+    [SerializeField] private AudioClip _spawnSound;
     private int _spawnCount = 0;
     private Transform _target;
     private bool _isSpawning;
@@ -58,6 +60,18 @@ public class SpawnerNormal : MonoBehaviour
                         SpawnedEnemies.Add(enemyStatus);
                         _spawnCount++;
                         _isSpawning = true;
+                    }
+
+                    if (_spawnEffect != null)
+                    {
+                        var eff = Instantiate(_spawnEffect, enemy.transform.position, Quaternion.identity);
+                        eff.transform.localScale = Vector3.one * 0.5f;
+                        eff.Play();
+                    }
+
+                    if (_spawnSound != null)
+                    {
+                        AudioSource.PlayClipAtPoint(_spawnSound, transform.position);
                     }
                 }
 

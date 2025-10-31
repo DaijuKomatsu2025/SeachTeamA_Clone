@@ -3,6 +3,7 @@ using UnityEngine;
 public class VisibleWallWhenAnnihilate : MonoBehaviour
 {
     [SerializeField] private GameObject _wall;
+    [SerializeField] private AudioClip _appearSound;
     private void Start()
     {
         _wall.SetActive(false);
@@ -10,7 +11,10 @@ public class VisibleWallWhenAnnihilate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Contains("Player")) WallSetActive();
+        if (other.gameObject.tag.Contains("Player"))
+        {
+            WallSetActive();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -20,18 +24,37 @@ public class VisibleWallWhenAnnihilate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Contains("Player")) WallSetActive();
+        if (other.gameObject.tag.Contains("Player"))
+        {
+            WallSetActive();
+        }
     }
 
     private void WallSetActive()
     {
         if (GameModeManager.currentMode == GameModeManager.GameMode.Annihilate)
         {
-            _wall.SetActive(true);
+            if (!_wall.activeSelf)
+            {
+                _wall.SetActive(true);
+                OnEffect();
+            }
         }
         else
         {
-            _wall.SetActive(false);
+            if (_wall.activeSelf)
+            {
+                _wall.SetActive(false);
+                OnEffect();
+            }
+        }
+    }
+
+    private void OnEffect()
+    {
+        if (_appearSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_appearSound, this.transform.position);
         }
     }
 }

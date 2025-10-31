@@ -3,6 +3,9 @@ using UnityEngine;
 public class VisibleWallWhenNear : MonoBehaviour
 {
     [SerializeField] private GameObject _wall;
+    [SerializeField] private ParticleSystem _appearEffect;
+    [SerializeField] private AudioClip _appearSound;
+
     private void Start()
     {
         _wall.SetActive(false);
@@ -10,11 +13,33 @@ public class VisibleWallWhenNear : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.tag.Contains("Player"))) _wall.SetActive(true);
+        if ((other.gameObject.tag.Contains("Player")))
+        {
+            OnEffect();
+            _wall.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ((other.gameObject.tag.Contains("Player"))) _wall.SetActive(false);
+        if ((other.gameObject.tag.Contains("Player")))
+        {
+            OnEffect();
+            _wall.SetActive(false);
+        }
+    }
+
+    private void OnEffect()
+    {
+        if (_appearEffect != null)
+        {
+            var effect = Instantiate(_appearEffect, _wall.transform.position, Quaternion.identity);
+            effect.transform.localScale = Vector3.one * 0.5f;
+            effect.Play();
+        }
+        if (_appearSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_appearSound, this.transform.position);
+        }
     }
 }
