@@ -11,6 +11,7 @@ public class StartButton : MonoBehaviour
 
     public void OnButtonclick()
     {
+        Debug.Log("StartButton clicked");
         _startButton.interactable = false;
         _menuSelector.enabled = false;
         StartCoroutine(EnableButtonAfterDelay(1f));
@@ -22,6 +23,11 @@ public class StartButton : MonoBehaviour
         _fadeLerper.FadeTo(2f);
         yield return new WaitForSeconds(delay);
         SceneReloader.Instance.loadGameScene("GameScene");
+    }
+
+    private void OnEnable()
+    {
+        _startButton.Select();
     }
 
     private void OnDisable()

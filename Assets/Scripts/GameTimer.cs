@@ -117,7 +117,6 @@ public class Timer : MonoBehaviour
 
         // 5. ゲームの次のアクション（例：ゲームオーバー画面の表示）
         Debug.Log("タイムアップ！ゲームを停止します。");
-        StartCoroutine(WaitForSceneLoad(3f)); // 待ってからシーンをロードする
         // Time.timeScale = 0f; // ゲーム全体をポーズさせたい場合
     }
 

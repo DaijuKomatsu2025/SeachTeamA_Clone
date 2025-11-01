@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -36,9 +37,11 @@ public class MenuSelector : MonoBehaviour
             _submit.performed += OnSubmit;
             _submit.Enable();
         }
+
+        Debug.Log("MenuSelector Awake completed");
     }
 
-    void Start()
+    private void OnEnable()
     {
         isDesided = false;
         UpdateSelection();
@@ -60,6 +63,12 @@ public class MenuSelector : MonoBehaviour
 
     void OnNavigate(InputAction.CallbackContext context)
     {
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            string selectedName = EventSystem.current.currentSelectedGameObject.name;
+            Debug.Log("現在選択されているUI: " + selectedName);
+        }
+
         if (buttons.Length <= 1) return;
         if (!canReceiveInput) return;
 
