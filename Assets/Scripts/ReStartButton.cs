@@ -8,9 +8,15 @@ public class ReStartButton : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private MenuSelector _menuSelector;
     [SerializeField] private ImageAlphaLerper _fadeLerper;
+    [SerializeField] private AudioClip desideSound;
 
     public void OnButtonclick()
     {
+        if (desideSound != null)
+        {
+            SoundManager.Instance.PlaySound(desideSound);
+        }
+
         restartButton.interactable = false;
         _menuSelector.enabled = false;
         StartCoroutine(EnableButtonAfterDelay(1f));

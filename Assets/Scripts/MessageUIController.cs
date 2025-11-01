@@ -321,12 +321,17 @@ public class MessageUIController : MonoBehaviour
         mainText.enableVertexGradient = true;
 
         // 🌟 [修正] グラデーションのインスタンス生成を簡略化（元のコードでも動作はする）
-        TMP_ColorGradient gradient = new TMP_ColorGradient(
-            setting.topLeftColor,
-            setting.topRightColor,
-            setting.bottomLeftColor,
-            setting.bottomRightColor
-        );
+
+        // ScriptableObjectとしてインスタンス化
+        TMP_ColorGradient gradient = ScriptableObject.CreateInstance<TMP_ColorGradient>();
+
+        // グラデーションカラーを設定
+        gradient.topLeft = setting.topLeftColor;
+        gradient.topRight = setting.topRightColor;
+        gradient.bottomLeft = setting.bottomLeftColor;
+        gradient.bottomRight = setting.bottomRightColor;
+
+        // TextMeshPro に適用
         mainText.colorGradientPreset = gradient;
 
         // テクスチャをマテリアルに適用

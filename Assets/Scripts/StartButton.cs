@@ -8,12 +8,20 @@ public class StartButton : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private MenuSelector _menuSelector;
     [SerializeField] private ImageAlphaLerper _fadeLerper;
+    [SerializeField] private AudioClip desideSound;
 
     public void OnButtonclick()
     {
         Debug.Log("StartButton clicked");
+
+        if (desideSound != null)
+        {
+            SoundManager.Instance.PlaySound(desideSound);
+        }
+
         _startButton.interactable = false;
         _menuSelector.enabled = false;
+
         StartCoroutine(EnableButtonAfterDelay(1f));
     }
 

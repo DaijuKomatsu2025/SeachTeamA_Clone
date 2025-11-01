@@ -32,17 +32,16 @@ public class CommonStatus : MonoBehaviour
     }
     protected virtual void OnDie()//€‚ñ‚¾‚Æ‚«‚Ìˆ—
     {
-        if(this.gameObject.GetComponent<PlayerController>())
-        {
-            GameModeManager.SetGameMode(GameModeManager.GameMode.GameOver);
-        }
-
         state = StateEnum.Dead;
         animator.ResetTrigger("Attack");
         animator.SetTrigger("Die");
         //€‚ñ‚¾‚ç”•bŒãÁ‚¦‚é
-        Destroy(gameObject, 3.0f);
+        if(this.gameObject.GetComponent<PlayerController>() == null)
+        {
+            Destroy(gameObject, 3.0f);
+        }
     }
+
     public void ReturnToNormalState()
     {
         if (state == StateEnum.Dead) return;

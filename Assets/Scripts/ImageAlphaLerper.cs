@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
 public class ImageAlphaLerper : MonoBehaviour
 {
     [SerializeField] private Image targetImage;
-    [SerializeField] private float duration = 1f; // •Ï‰»‚É‚©‚¯‚éŠÔ
+    [SerializeField] private float duration = 1f; // å¤‰åŒ–ã«ã‹ã‘ã‚‹æ™‚é–“
 
     private void Start()
     {
@@ -15,6 +15,7 @@ public class ImageAlphaLerper : MonoBehaviour
 
     public void FadeTo(float targetAlpha)
     {
+        this.targetImage.enabled = true;
         StartCoroutine(LerpAlpha(targetAlpha));
     }
 
@@ -31,6 +32,7 @@ public class ImageAlphaLerper : MonoBehaviour
             yield return null;
         }
 
-        targetImage.color = endColor; // ÅI’l‚ğ•ÛØ
+        targetImage.color = endColor; // æœ€çµ‚å€¤ã‚’ä¿è¨¼
+        this.targetImage.enabled = false;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -37,8 +38,6 @@ public class MenuSelector : MonoBehaviour
             _submit.performed += OnSubmit;
             _submit.Enable();
         }
-
-        Debug.Log("MenuSelector Awake completed");
     }
 
     private void OnEnable()
@@ -84,7 +83,7 @@ public class MenuSelector : MonoBehaviour
 
         if (navigateSound != null)
         {
-            AudioSource.PlayClipAtPoint(navigateSound, Camera.main.transform.position);
+            SoundManager.Instance.PlaySound(navigateSound);
         }
 
         // 入力受付を一時停止
@@ -104,14 +103,6 @@ public class MenuSelector : MonoBehaviour
         if (isDesided) { Debug.Log("Submit ignored: already decided"); return; }
         if (!canReceiveInput) { Debug.Log("Submit ignored: cooldown"); return; }
 
-        Debug.Log("Submit accepted");
-
-        if (desideSound != null && Camera.main != null)
-        {
-            AudioSource.PlayClipAtPoint(desideSound, Camera.main.transform.position);
-        }
-
-        Debug.Log("Invoking button click");
         buttons[selectedIndex].onClick.Invoke();
         Debug.Log("Button click invoked");
 
