@@ -476,11 +476,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1487f429399745c4fa80abb04b611ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  cautionTime: 120
-  dangerTime: 60
+  cautionTime: 60
+  dangerTime: 30
   tmpText: {fileID: 192830131}
   timeText: {fileID: 192830131}
-  totalTime: 330
+  totalTime: 180
   shakeMagnitude: 10
   shakeSpeed: 50
   shakeDuration: 0.5
