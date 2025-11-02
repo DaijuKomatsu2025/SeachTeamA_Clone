@@ -17,6 +17,8 @@ public class GetTreasure : MonoBehaviour
                 AudioSource.PlayClipAtPoint(_getSound, transform.position);
             }
             _gameclearCamera.Priority.Value = 20;
+            other.GetComponent<Animator>().SetFloat("MoveSpeed", 0);
+            other.GetComponent<PlayerController>().enabled = false;
             StartCoroutine(GameClear());
         }
     }
