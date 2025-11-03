@@ -176,6 +176,9 @@ Assets/
 <img width="800" height="483" alt="mapCsv2" src="https://github.com/user-attachments/assets/7f6ed871-021b-4d78-aff6-5d35a9ac6554" />
 
 ## 敵スポーナー仕様
+- 部屋用スポーナーは殲滅モードにて敵を全滅させる必要がある事から、通路をギミック壁で塞ぎプレイヤーを部屋から出られなくする必要があります。
+- 生成時敵に死亡時発行イベントを登録してリストに登録し、敵の死亡時スポーナーにイベントを送る。敵が全滅したら殲滅モードを終了し自身を消去。
+- 通常スポーナーはプレイヤーがコライダーの範囲内に入ると敵の生成を行うのは同じですが、リスト管理はしません。
 <img width="800" height="409" alt="spawner" src="https://github.com/user-attachments/assets/09ea8615-4ddc-4105-a9c4-9d8020bd402f" />
 
 ---
