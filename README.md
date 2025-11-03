@@ -172,7 +172,7 @@ Assets/
 - マップ上一つしか配置しないもの(宝箱、ボス用スポーナー)と回復・時計のアイテムは制作時間と位置の細かい変更やバランス調整の手間から考慮して、今回は手動での配置としました。
 
 <img width="800" height="483" alt="mapCsv1" src="https://github.com/user-attachments/assets/c63a055b-0c2d-4ffc-a01c-1368a9e17bb3" />
-<img width="800" height="483" alt="mapCsv2" src="https://github.com/user-attachments/assets/62cd0dc0-2909-43e7-bb5a-d2f24ac212fc" />
+<img width="800" height="483" alt="mapCsv2" src="https://github.com/user-attachments/assets/7f6ed871-021b-4d78-aff6-5d35a9ac6554" />
 
 ---
 
