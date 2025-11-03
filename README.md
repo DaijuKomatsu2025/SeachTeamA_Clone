@@ -175,6 +175,9 @@ Assets/
 <img width="800" height="483" alt="mapCsv1" src="https://github.com/user-attachments/assets/c63a055b-0c2d-4ffc-a01c-1368a9e17bb3" />
 <img width="800" height="483" alt="mapCsv2" src="https://github.com/user-attachments/assets/7f6ed871-021b-4d78-aff6-5d35a9ac6554" />
 
+## 敵スポーナー仕様
+<img width="800" height="409" alt="spawner" src="https://github.com/user-attachments/assets/09ea8615-4ddc-4105-a9c4-9d8020bd402f" />
+
 ---
 
 > **目的**  
