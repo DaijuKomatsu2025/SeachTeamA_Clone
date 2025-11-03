@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Splines.ExtrusionShapes;
 
 [RequireComponent(typeof(Collider))]
 public class SpawnerBoss : MonoBehaviour

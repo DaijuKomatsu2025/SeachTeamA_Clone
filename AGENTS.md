@@ -2,7 +2,7 @@
 - Project name: SearchTeamA
 - Unity version: Unity 6000.2.8f1
 - Active game object:
-  - Name: RingImageInner
+  - Name: SpawnerBoss
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
