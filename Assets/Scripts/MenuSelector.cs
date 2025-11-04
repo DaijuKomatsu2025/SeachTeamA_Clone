@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -6,17 +7,14 @@ public class MenuSelector : MonoBehaviour
 {
     [SerializeField] private AudioClip navigateSound; // ナビゲーション音
     [SerializeField] private AudioClip desideSound; // 決定音
-
     [SerializeField] private GameObject selectorImage; // 選択インジケーターのイメージ
-    public Button[] buttons; // インスペクターで2つのボタンを割り当て
-    private int selectedIndex = 0;
+    [SerializeField] private Button[] buttons; // インスペクターでボタンを割り当て
+    [SerializeField] private float inputCooldownTime = 0.5f; // クールダウン時間（秒）
 
-    public float inputCooldownTime = 0.5f; // クールダウン時間（秒）
     private bool canReceiveInput = true;
-
+    private int selectedIndex = 0;
     private InputAction _navigate;
     private InputAction _submit;
-
     private bool isDesided = false;
 
     void Awake()
@@ -25,7 +23,10 @@ public class MenuSelector : MonoBehaviour
         var inputActionAsset = GetComponent<PlayerInput>().actions;
         _navigate = inputActionAsset.FindAction("Navigate");
         _submit = inputActionAsset.FindAction("Submit");
+    }
 
+    private void OnEnable()
+    {
         if (_navigate != null)
         {
             _navigate.performed += OnNavigate;
@@ -36,10 +37,7 @@ public class MenuSelector : MonoBehaviour
             _submit.performed += OnSubmit;
             _submit.Enable();
         }
-    }
 
-    void Start()
-    {
         isDesided = false;
         UpdateSelection();
     }
@@ -56,10 +54,21 @@ public class MenuSelector : MonoBehaviour
             _submit.performed -= OnSubmit;
             _submit.Disable();
         }
+
+        foreach (var button in buttons)
+        {
+            if (button != null) button.enabled = false;
+        }
     }
 
     void OnNavigate(InputAction.CallbackContext context)
     {
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            string selectedName = EventSystem.current.currentSelectedGameObject.name;
+            Debug.Log("現在選択されているUI: " + selectedName);
+        }
+
         if (buttons.Length <= 1) return;
         if (!canReceiveInput) return;
 
@@ -75,7 +84,7 @@ public class MenuSelector : MonoBehaviour
 
         if (navigateSound != null)
         {
-            AudioSource.PlayClipAtPoint(navigateSound, Camera.main.transform.position);
+            SoundManager.Instance.PlaySound(navigateSound);
         }
 
         // 入力受付を一時停止
@@ -95,14 +104,6 @@ public class MenuSelector : MonoBehaviour
         if (isDesided) { Debug.Log("Submit ignored: already decided"); return; }
         if (!canReceiveInput) { Debug.Log("Submit ignored: cooldown"); return; }
 
-        Debug.Log("Submit accepted");
-
-        if (desideSound != null && Camera.main != null)
-        {
-            AudioSource.PlayClipAtPoint(desideSound, Camera.main.transform.position);
-        }
-
-        Debug.Log("Invoking button click");
         buttons[selectedIndex].onClick.Invoke();
         Debug.Log("Button click invoked");
 
@@ -119,15 +120,15 @@ public class MenuSelector : MonoBehaviour
         buttons[selectedIndex].Select(); // UI上で選択状態にする
     }
 
-    public void SelectStartButton()
+    public void SelectFirstButton()
     {
         selectedIndex = 0;
         UpdateSelection();
     }
 
-    public void SelectExitButton() 
+    public void SelectLastButton() 
     {
-        selectedIndex = 1;
+        selectedIndex = buttons.Length - 1;
         UpdateSelection();
     }
 }

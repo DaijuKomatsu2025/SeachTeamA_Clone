@@ -227,7 +227,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2795954043102519227}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -851,7 +851,6 @@ GameObject:
   - component: {fileID: 5910262750883389726}
   - component: {fileID: 4179905147900440199}
   - component: {fileID: 456915227180118143}
-  - component: {fileID: 6497877678698106374}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -890,7 +889,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6467755355746568643}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -930,29 +929,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6497877678698106374
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6467755355746568643}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.50000036
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: -0.0000018477449, y: 0, z: -0.0000019967565}
 --- !u!1 &6633783157494435896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1118,6 @@ GameObject:
   - component: {fileID: 7438060838958365755}
   - component: {fileID: 2330377451303315754}
   - component: {fileID: 6661041389716525259}
-  - component: {fileID: 3835919116281960808}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1159,8 +1134,8 @@ Transform:
   m_GameObject: {fileID: 7511009627388711360}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35699993, z: 0.04500008}
-  m_LocalScale: {x: 0.04177162, y: 0.11411, z: 1}
+  m_LocalPosition: {x: 0, y: 0.35699993, z: 0.467}
+  m_LocalScale: {x: 0.04177162, y: 0.11411, z: 0.19}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2191515698399469966}
@@ -1181,7 +1156,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7511009627388711360}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -1221,27 +1196,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3835919116281960808
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7511009627388711360}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000005, y: 1, z: 1.0000005}
-  m_Center: {x: -0.0000019073495, y: 0, z: -0.0000019073495}
 --- !u!1 &7590279648532555379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1296,7 @@ GameObject:
   - component: {fileID: 3812604331949642782}
   - component: {fileID: 4034224283423188062}
   - component: {fileID: 5265597605492424934}
+  - component: {fileID: 2573905498892711510}
   m_Layer: 0
   m_Name: TreasureBox
   m_TagString: Untagged
@@ -1398,9 +1353,23 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 0.5, y: 0.5, z: 0.08}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.58, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &2573905498892711510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000248297386379629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee958ff952bea674bb6927a65d1b7a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GetTreasure
+  _gameclearCamera: {fileID: 0}
+  _getSound: {fileID: 8300000, guid: 2ef5b7654acaccf479eb93098852a301, type: 3}

@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider))]
 public class SpawnerBoss : MonoBehaviour
 {
+    [SerializeField] private CinemachineCamera _camera;
     [SerializeField] private ParticleSystem _spawnEffect;
     [SerializeField] private AudioClip _spawnSound;
     [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private Collider _collider;
     [SerializeField] private int _maxSpawnCount = 21;
+    private float spawnDistance = 3f;
     private int _spawnCount = 0;
+    private float rad = 0f;
     private Transform _target;
     private bool _isSpawning;
 
@@ -67,8 +71,16 @@ public class SpawnerBoss : MonoBehaviour
             }
             else
             {
-                var distanceVector = new Vector3(5, 0);
-                var spawnPositionFromAround = Quaternion.Euler(0, Random.Range(0, 360), 0) * distanceVector;
+                if(spawnDistance % 10 == 0)
+                {
+                    spawnDistance += 2f;
+                }
+                var distanceVector = new Vector3(spawnDistance + Random.Range(-1.5f, 1.5f), 0);
+
+                var spawnPositionFromAround = Quaternion.Euler(0, rad, 0) * distanceVector;
+
+                rad += 30f;
+
                 var spawnPosition = transform.position + spawnPositionFromAround;
 
                 NavMeshHit hit;
@@ -124,12 +136,23 @@ public class SpawnerBoss : MonoBehaviour
         }
     }
 
+    IEnumerator BossCamera()
+    {
+        if (_camera != null)
+        {
+            _camera.Priority = 21;
+            yield return new WaitForSeconds(0.6f);
+            _camera.Priority = 0;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!_isSpawning && other.gameObject.tag.Contains("Player"))
         {
             GameModeManager.SetGameMode(GameModeManager.GameMode.Annihilate);
             _target = other.transform;
+            StartCoroutine(BossCamera());
             StartCoroutine(SpawnLoop());
         }
     }

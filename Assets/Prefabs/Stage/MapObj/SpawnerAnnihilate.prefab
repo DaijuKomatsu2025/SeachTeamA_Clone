@@ -50,7 +50,7 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 4692092079593511437, guid: e1a7a6cfcba3ef649bbd43e3a8d71951, type: 3}
   _collider: {fileID: 6354873781362202429}
-  _maxSpawnCount: 10
+  _maxSpawnCount: 20
 --- !u!65 &6354873781362202429
 BoxCollider:
   m_ObjectHideFlags: 0

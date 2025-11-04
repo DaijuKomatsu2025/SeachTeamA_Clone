@@ -36,8 +36,12 @@ public class CommonStatus : MonoBehaviour
         animator.ResetTrigger("Attack");
         animator.SetTrigger("Die");
         //€‚ñ‚¾‚ç”•bŒãÁ‚¦‚é
-        Destroy(gameObject, 3.0f);
+        if(this.gameObject.GetComponent<PlayerController>() == null)
+        {
+            Destroy(gameObject, 3.0f);
+        }
     }
+
     public void ReturnToNormalState()
     {
         if (state == StateEnum.Dead) return;

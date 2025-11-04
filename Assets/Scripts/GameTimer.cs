@@ -117,7 +117,6 @@ public class Timer : MonoBehaviour
 
         // 5. ゲームの次のアクション（例：ゲームオーバー画面の表示）
         Debug.Log("タイムアップ！ゲームを停止します。");
-        StartCoroutine(WaitForSceneLoad(3f)); // 待ってからシーンをロードする
         // Time.timeScale = 0f; // ゲーム全体をポーズさせたい場合
     }
 
@@ -145,7 +144,7 @@ public class Timer : MonoBehaviour
 
         // 2. 時間フォーマットの適用（「D2」で常に2桁表示を保証）
         // 例: minutes.ToString("D2") が "09" や "10" を返す
-        string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+        string formattedTime = string.Format("{0:0}:{1:00}", minutes, seconds);
 
         // TextMesh Proコンポーネントに設定
         if (timeText != null)

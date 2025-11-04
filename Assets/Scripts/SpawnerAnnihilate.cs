@@ -11,6 +11,8 @@ public class SpawnerAnnihilate : MonoBehaviour
     [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private Collider _collider;
     [SerializeField] private int _maxSpawnCount = 20;
+    private float spawnDistance = 1f;
+    private float rad = 0f;
     private int _spawnCount = 0;
     private Transform _target;
     private bool _isSpawning;
@@ -68,8 +70,16 @@ public class SpawnerAnnihilate : MonoBehaviour
             }
             else
             {
-                var distanceVector = new Vector3(1, 0);
-                var spawnPositionFromAround = Quaternion.Euler(0, Random.Range(0, 360), 0) * distanceVector;
+                if (spawnDistance % 10 == 0)
+                {
+                    spawnDistance += 1f;
+                }
+
+                var distanceVector = new Vector3(spawnDistance + Random.Range(-1.5f, 1.5f), 0);
+
+                var spawnPositionFromAround = Quaternion.Euler(0, rad, 0) * distanceVector;
+                rad += 30f;
+
                 var spawnPosition = transform.position + spawnPositionFromAround;
 
                 NavMeshHit hit;

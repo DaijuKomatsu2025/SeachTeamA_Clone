@@ -933,9 +933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e498f05941ce044a910fdfdc9ffb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
-  hp: 3
-  maxHp: 3
-  attack: 1
+  hp: 5
+  maxHp: 5
+  attack: 3
   moveSpeed: 2
   hitParticle: {fileID: 2834059146386845670}
   hitAudio: {fileID: -6809462526716782736}
