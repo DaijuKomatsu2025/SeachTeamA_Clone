@@ -51,14 +51,14 @@
 | **ゲームタイトル** | 宝探し |
 | **一言で説明すると** | コンパス頼りに宝を探す3D探索ゲーム |
 | **ゲームの目的** | 宝箱を見つけ出す。 |
-| **プレイヤー操作** | 上下左右・WASDで移動、Enter・クリックで攻撃 |
+| **プレイヤー操作** | 上下左右・WASDで移動、Enter・クリックで攻撃　ゲームパッド・タッチ操作対応 |
 | **勝利条件** | 宝箱の部屋に辿り着く |
 | **失敗条件** | 制限時間がなくなるか、HPがゼロになる |
 | **特徴・工夫点** | カメラ・ヒント表示を組み合わせた誘導演出 |
 
 ---
 
-## 使用予定のUnity機能 <a id="unity-features"></a>
+## 使用したUnity機能 <a id="unity-features"></a>
 
 ☑ = 使用予定（下記チェックボックスに `[x]` を入れる）  
 
@@ -77,6 +77,18 @@
 - [x] Timeline / Cinemachine  
 - [ ] その他（　　　　　　　　　　　　　　　　　　　　）
 
+## 使用したアセット
+- Level 1 Monster Pack
+ https://assetstore.unity.com/packages/3d/characters/creatures/level-1-monster-pack-77703
+
+- Haon SD series Bundle
+ https://assetstore.unity.com/packages/3d/animations/haon-sd-series-bundle-84992
+
+## 使用した効果音・BGM のサイト
+- 魔王魂
+https://maou.audio/category/bgm/
+- 効果音ラボ
+https://soundeffect-lab.info/
 ---
 
 ## 進行スケジュール（目安） <a id="schedule"></a>
@@ -136,19 +148,26 @@
 - **フォルダ構成推奨**
 ```
 Assets/
-├─ Animations/
+├─ Animator/
+│   ├─ Animation/
+├─ Materials/
+│   ├─ Character/
+│   ├─ Stage/
+├─ Particles/
+├─ Prefabs/
+│   ├─ Character/
+│   ├─ Particle/
+│   ├─ Stage/
+├─ Scenes/
 ├─ Scripts/
 │   ├─ Character/
 │   ├─ Stage/
 │   ├─ UI/
-├─ Prefabs/
-│   ├─ Stage/
-├─ Materials/
-│   ├─ Character/
-│   ├─ Stage/
-├─ Scenes/
-├─ UI/
-└─ Sound/
+└─ Sounds/
+│   ├─ BGM/
+├─ Sprites/
+│   ├─ Particle/
+│   ├─ UI/
 ```
 ---
 
@@ -158,10 +177,10 @@ Assets/
 |------|------|------|
 | **タイトル** | |宝探し |
 | **ゲーム紹介** | |コンパスを頼りに宝を探す探索アクション |
-| **アピールポイント** | |ヒントとカメラ演出を使用した探索演出|
-| **担当箇所で頑張った点** | 小松 | ナビメッシュがしばらくきちんと生成出来ておらず、解決するのに苦労しました。|
+| **アピールポイント** | |カメラ・ヒント表示を組み合わせた誘導演出|
+| **担当箇所で頑張った点** | 小松 | ナビメッシュがしばらくきちんと生成できず処理が無駄に重かったのですが、データの持ち方を変更したり設定を調べて解決できました。|
 | **担当箇所で頑張った点** | 渡瀬 | 配布Assetsの理解や継承を使ったことによるコーディングに苦労しました。 |
-| **担当箇所で頑張った点** | 北嶋 |ゲーム画面のUI |UIを動かす為の他プログラムの調査と基本的に他メンバーの作業に影響の出ないような立ち回りを心がけるのを意識しました。
+| **担当箇所で頑張った点** | 北嶋 | UIを動かす為の他プログラムの調査と基本的に他メンバーの作業に影響の出ないような立ち回りを心がけるのを意識しました。
 | **発表担当** | 各自 |リーダーが操作、全員でコメント補足 |
 
 ---
