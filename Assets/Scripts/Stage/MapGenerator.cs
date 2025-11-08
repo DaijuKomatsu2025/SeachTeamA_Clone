@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -24,8 +25,6 @@ public class MapGenerator : MonoBehaviour
     private Vector3 _newPosition;
     private string[] _readLines = default!;
     private string[] _readEventLines = default!;
-    private string _path = Path.Combine(Application.streamingAssetsPath, "map01.csv");
-    private string _eventPath = Path.Combine(Application.streamingAssetsPath, "eventMap01.csv");
 
     private int _mapWidth = 10;
     private int _mapHeight = 10;
@@ -52,14 +51,8 @@ public class MapGenerator : MonoBehaviour
 
     private void ReadData()
     {
-        try
-        {
-            _readLines = File.ReadAllLines(_path);
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"{_path} 読み込みエラー: {ex.Message}");
-        }
+        TextAsset csvFile = Resources.Load<TextAsset>("map01"); // 拡張子不要
+        _readLines = csvFile.text.Split('\n');
 
         if (_readLines.Last().Trim() == "") _readLines = _readLines.Take(_readLines.Length - 1).ToArray();//最終行が空行なら削除
 
@@ -69,14 +62,8 @@ public class MapGenerator : MonoBehaviour
 
     private void ReadEventData()
     {
-        try
-        {
-            _readEventLines = File.ReadAllLines(_eventPath);
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"{_eventPath} 読み込みエラー: {ex.Message}");
-        }
+        TextAsset csvFile = Resources.Load<TextAsset>("eventMap01"); // 拡張子不要
+        _readEventLines = csvFile.text.Split('\n');
 
         if (_readEventLines.Last().Trim() == "") _readEventLines = _readEventLines.Take(_readEventLines.Length - 1).ToArray();
 
@@ -107,10 +94,10 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        var floor = Instantiate(_floorPrefab, new Vector3(60,0,60), Quaternion.identity, _parent);
+        var floor = Instantiate(_floorPrefab, new Vector3(60, 0, 60), Quaternion.identity, _parent);
 
         // NavMeshSurfaceを収集
-        var surface = floor.GetComponent<NavMeshSurface>();
+        //var surface = floor.GetComponent<NavMeshSurface>();
         //if (surface != null) _allSurfaces.Add(surface);
 
         InitEvent();
@@ -121,7 +108,8 @@ public class MapGenerator : MonoBehaviour
         _parent.transform.position = _newPosition;
 
         // すべてのSurfaceを一括ベイク
-        surface.BuildNavMesh();
+        //surface.BuildNavMesh();
+        floor.GetComponent<NavMeshSurface>().BuildNavMesh();
 
         yield return null;
     }
@@ -136,7 +124,7 @@ public class MapGenerator : MonoBehaviour
             {
                 var pos = new Vector3(x * _mapWidth, 0, y * _mapHeight);
 
-                if (cells[y] == "00") { } // 何もしない
+                if (cells[y].StartsWith("00")) { } // 何もしない
                 else if (cells[y] == "SS")
                 {
                     _newPosition = new Vector3(-x * mapOffset, 0, -y * mapOffset - playerOffsetY);
@@ -152,7 +140,7 @@ public class MapGenerator : MonoBehaviour
                     int.TryParse(cells[y].Substring(1, 1), out int code);
                     Instantiate(_nearWalls[code - 1], pos, Quaternion.identity, _parent);
                 }
-                else if (cells[y] == "A1")
+                else if (cells[y].StartsWith("A1"))
                 {
                     var aw = Instantiate(_spawnA_Walls[0], pos, Quaternion.identity, _parent);
                     aw.GetComponentInChildren<SpawnerAnnihilate>().SetUiController(_uiController);
@@ -188,7 +176,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("eventMap.CSVデータに不備があります");
+                    Debug.Log("eventMap.CSVデータに不備 " + cells[y]);
                 }
             }
         }

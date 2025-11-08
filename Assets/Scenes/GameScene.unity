@@ -7547,6 +7547,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 192830133}
     - target: {fileID: 2573905498892711510, guid: 6585831c82eccda40b1262f3051689c6, type: 3}
+      propertyPath: _fadeLerper
+      value: 
+      objectReference: {fileID: 574067303}
+    - target: {fileID: 2573905498892711510, guid: 6585831c82eccda40b1262f3051689c6, type: 3}
       propertyPath: _gameclearCamera
       value: 
       objectReference: {fileID: 754603714}
